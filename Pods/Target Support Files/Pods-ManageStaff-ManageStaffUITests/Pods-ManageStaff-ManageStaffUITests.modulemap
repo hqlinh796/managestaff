@@ -1,0 +1,6 @@
+framework module Pods_ManageStaff_ManageStaffUITests {
+  umbrella header "Pods-ManageStaff-ManageStaffUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>921323378400-79cigq66hefc5vol7e75u7cv13e3uuf6.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.921323378400-79cigq66hefc5vol7e75u7cv13e3uuf6</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBm12UOBnDdkG7oKaEu483bTG2NJ92rKPY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>921323378400</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>abc.ManageStaff</string>
+	<key>PROJECT_ID</key>
+	<string>managestaff-cc156</string>
+	<key>STORAGE_BUCKET</key>
+	<string>managestaff-cc156.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:921323378400:ios:e226d292af98098e2ee285</string>
+	<key>DATABASE_URL</key>
+	<string>https://managestaff-cc156.firebaseio.com</string>
+</dict>
+</plist>
