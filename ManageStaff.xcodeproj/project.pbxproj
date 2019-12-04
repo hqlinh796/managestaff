@@ -22,6 +22,8 @@
 		C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635C238FE4E70017C0A9 /* SignUpVC.swift */; };
 		C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635E238FE5010017C0A9 /* SignInVC.swift */; };
 		C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3976361239029B80017C0A9 /* CheckInVC.swift */; };
+		C3A0325C23959A32005FC134 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325B23959A32005FC134 /* Setting.swift */; };
+		C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */; };
 		C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F04612239128100025B761 /* ManageAccountVC.swift */; };
 		E3CCBDD9CCDFC6CB4E5BBEBA /* Pods_ManageStaff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C0A23852FCBAA30C37828C /* Pods_ManageStaff.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +72,8 @@
 		C397635C238FE4E70017C0A9 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C397635E238FE5010017C0A9 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		C3976361239029B80017C0A9 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
+		C3A0325B23959A32005FC134 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditAccountVC.swift; path = "../New Group/EditAccountVC.swift"; sourceTree = "<group>"; };
 		C3F04612239128100025B761 /* ManageAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountVC.swift; sourceTree = "<group>"; };
 		F456E9CA01BE0B1715B76068 /* Pods-ManageStaff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaff.release.xcconfig"; path = "Target Support Files/Pods-ManageStaff/Pods-ManageStaff.release.xcconfig"; sourceTree = "<group>"; };
 		FF170F78B3ECE49BE7862E6A /* Pods-ManageStaffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaffTests.debug.xcconfig"; path = "Target Support Files/Pods-ManageStaffTests/Pods-ManageStaffTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +123,7 @@
 		C34C5C2E238E142600A54877 = {
 			isa = PBXGroup;
 			children = (
+				C3A0325B23959A32005FC134 /* Setting.swift */,
 				C34C5C39238E142600A54877 /* ManageStaff */,
 				C34C5C51238E142800A54877 /* ManageStaffTests */,
 				C34C5C5C238E142800A54877 /* ManageStaffUITests */,
@@ -141,18 +146,13 @@
 		C34C5C39238E142600A54877 /* ManageStaff */ = {
 			isa = PBXGroup;
 			children = (
+				C3A032612395DB54005FC134 /* System */,
+				C3A032602395DB2C005FC134 /* CheckInOut */,
+				C3A0325F2395DB13005FC134 /* Account */,
 				C3976360238FEB000017C0A9 /* Authentication */,
-				C34C5C3A238E142600A54877 /* AppDelegate.swift */,
-				C3976361239029B80017C0A9 /* CheckInVC.swift */,
 				C34C5C3C238E142600A54877 /* ViewController.swift */,
-				C34C5C3E238E142600A54877 /* Main.storyboard */,
-				C34C5C44238E142800A54877 /* Assets.xcassets */,
-				C34C5C46238E142800A54877 /* LaunchScreen.storyboard */,
 				C34C5C49238E142800A54877 /* Info.plist */,
-				C34C5C41238E142600A54877 /* ManageStaff.xcdatamodeld */,
-				C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */,
-				C30BBDE923903468008C2956 /* ScanQRVC.swift */,
-				C3F04612239128100025B761 /* ManageAccountVC.swift */,
+				C34C5C3E238E142600A54877 /* Main.storyboard */,
 			);
 			path = ManageStaff;
 			sourceTree = "<group>";
@@ -182,6 +182,36 @@
 				C397635E238FE5010017C0A9 /* SignInVC.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		C3A0325F2395DB13005FC134 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				C3F04612239128100025B761 /* ManageAccountVC.swift */,
+				C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		C3A032602395DB2C005FC134 /* CheckInOut */ = {
+			isa = PBXGroup;
+			children = (
+				C30BBDE923903468008C2956 /* ScanQRVC.swift */,
+				C3976361239029B80017C0A9 /* CheckInVC.swift */,
+			);
+			path = CheckInOut;
+			sourceTree = "<group>";
+		};
+		C3A032612395DB54005FC134 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				C34C5C3A238E142600A54877 /* AppDelegate.swift */,
+				C34C5C44238E142800A54877 /* Assets.xcassets */,
+				C34C5C46238E142800A54877 /* LaunchScreen.storyboard */,
+				C34C5C41238E142600A54877 /* ManageStaff.xcdatamodeld */,
+				C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 		DCC5A18436F7C6C029C08A33 /* Frameworks */ = {
@@ -442,6 +472,8 @@
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
+				C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */,
+				C3A0325C23959A32005FC134 /* Setting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

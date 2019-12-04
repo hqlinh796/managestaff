@@ -19,7 +19,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var textfieldName: UITextField!
     @IBOutlet weak var labelError: UILabel!
     @IBOutlet weak var textfieldPhone: UITextField!
-    
+    let defaultURLImage = "https://firebasestorage.googleapis.com/v0/b/managestaff-cc156.appspot.com/o/Zjw7LLp3ctNOArBplgmxN8kmjoW2.png?alt=media&token=02a55f39-691b-488a-b15a-a712d36ea484"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,10 +47,10 @@ class SignUpVC: UIViewController {
             //store user to database
             let db = Firestore.firestore()
             
-            
             db.collection("users").document(Result!.user.uid).setData([
                 "name": self.textfieldName.text!,
                 "phone": self.textfieldPhone.text!,
+                "image": self.defaultURLImage,
                 "role": "",
                 "uid": Result!.user.uid
             ]) { err in
