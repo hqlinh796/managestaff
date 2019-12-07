@@ -24,6 +24,7 @@
 		C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3976361239029B80017C0A9 /* CheckInVC.swift */; };
 		C3A0325C23959A32005FC134 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325B23959A32005FC134 /* Setting.swift */; };
 		C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */; };
+		C3E7BB04239B2DF800FBE44B /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7BB03239B2DF800FBE44B /* ResetPasswordVC.swift */; };
 		C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F04612239128100025B761 /* ManageAccountVC.swift */; };
 		E3CCBDD9CCDFC6CB4E5BBEBA /* Pods_ManageStaff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C0A23852FCBAA30C37828C /* Pods_ManageStaff.framework */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		C3976361239029B80017C0A9 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
 		C3A0325B23959A32005FC134 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditAccountVC.swift; path = "../New Group/EditAccountVC.swift"; sourceTree = "<group>"; };
+		C3E7BB03239B2DF800FBE44B /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		C3F04612239128100025B761 /* ManageAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountVC.swift; sourceTree = "<group>"; };
 		F456E9CA01BE0B1715B76068 /* Pods-ManageStaff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaff.release.xcconfig"; path = "Target Support Files/Pods-ManageStaff/Pods-ManageStaff.release.xcconfig"; sourceTree = "<group>"; };
 		FF170F78B3ECE49BE7862E6A /* Pods-ManageStaffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaffTests.debug.xcconfig"; path = "Target Support Files/Pods-ManageStaffTests/Pods-ManageStaffTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 			children = (
 				C397635C238FE4E70017C0A9 /* SignUpVC.swift */,
 				C397635E238FE5010017C0A9 /* SignInVC.swift */,
+				C3E7BB03239B2DF800FBE44B /* ResetPasswordVC.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */,
 				C34C5C43238E142600A54877 /* ManageStaff.xcdatamodeld in Sources */,
 				C34C5C3D238E142600A54877 /* ViewController.swift in Sources */,
+				C3E7BB04239B2DF800FBE44B /* ResetPasswordVC.swift in Sources */,
 				C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */,
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
