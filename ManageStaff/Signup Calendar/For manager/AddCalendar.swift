@@ -12,29 +12,37 @@ import FSCalendar
 
 protocol AddCalendarDelegate {
     func AddCalendar(month: Int, year: Int)
+    func UpdateCalendar(month: Int, year: Int)
 }
 
 class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     @IBOutlet weak var calendar: FSCalendar!
-    var month = Calendar.current.component(.month, from: Date())
-    var year = Calendar.current.component(.year, from: Date())
+    var mode: String = ""
+    var date = Date()
     var blockedDay: [Int] = []
     var delegate:AddCalendarDelegate?
     
     override func viewDidLoad() {
         calendar.allowsMultipleSelection = true
+        calendar.setCurrentPage(Date(), animated: true)
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy"
+        
+        for day in blockedDay {
+            self.calendar.select(formatter.date(from: "\(day)/\(Calendar.current.component(.month, from: date))/\(Calendar.current.component(.year, from: date))"))
+        }
     }
+
     
     @IBAction func SaveTapped(_ sender: Any) {
+        date = calendar.currentPage
         let db = Firestore.firestore()
-        db.collection("calendar").document("\(month)-\(year)").setData(["blocked day": blockedDay])
-        delegate?.AddCalendar(month: month, year: year)
+        db.collection("calendar").document("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").setData(["blocked day": blockedDay])
+        delegate?.AddCalendar(month: (Calendar.current.component(.month, from: date)), year: (Calendar.current.component(.year, from: date)))
     }
     
     //add selected day to list
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        month = Calendar.current.component(.month, from: date)
-        year = Calendar.current.component(.year, from: date)
         blockedDay.append(Calendar.current.component(.day, from: date))
     }
     
@@ -46,7 +54,6 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     }
     
     func calendarCurrentPageDidChange(_ calendar: FSCalendar) {
-        month = Calendar.current.component(.month, from: calendar.currentPage)
-        year = Calendar.current.component(.year, from: calendar.currentPage)
+        blockedDay = []
     }
 }
