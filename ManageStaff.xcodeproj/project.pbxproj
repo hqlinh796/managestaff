@@ -12,6 +12,7 @@
 		B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236DF32239DF749008EBBBA /* StaffVC.swift */; };
 		B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395D77239CD8A900E7E71E /* ManagerVC.swift */; };
 		B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395D79239CDFE200E7E71E /* AddCalendar.swift */; };
+		B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F200B239F30DA005D1E49 /* RegisterVC.swift */; };
 		C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30BBDE923903468008C2956 /* ScanQRVC.swift */; };
 		C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3A238E142600A54877 /* AppDelegate.swift */; };
 		C34C5C3D238E142600A54877 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3C238E142600A54877 /* ViewController.swift */; };
@@ -60,6 +61,7 @@
 		B236DF32239DF749008EBBBA /* StaffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffVC.swift; sourceTree = "<group>"; };
 		B2395D77239CD8A900E7E71E /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
 		B2395D79239CDFE200E7E71E /* AddCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendar.swift; sourceTree = "<group>"; };
+		B25F200B239F30DA005D1E49 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		C30BBDE923903468008C2956 /* ScanQRVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRVC.swift; sourceTree = "<group>"; };
 		C34C5C37238E142600A54877 /* ManageStaff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageStaff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34C5C3A238E142600A54877 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				B236DF32239DF749008EBBBA /* StaffVC.swift */,
+				B25F200B239F30DA005D1E49 /* RegisterVC.swift */,
 			);
 			path = "For staff";
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
+				B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */,
 				B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */,
 				C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */,
 				B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */,

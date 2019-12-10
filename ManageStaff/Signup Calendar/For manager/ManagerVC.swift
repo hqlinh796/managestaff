@@ -10,11 +10,9 @@ import UIKit
 import Firebase
 
 class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, AddCalendarDelegate{
-    func UpdateCalendar(month: Int, year: Int) {
-        print("concac")
-    }
+
     
-    
+    //MARK: outlets and variables
     @IBOutlet weak var table: UITableView!
     
     //list of created calendar
@@ -23,6 +21,10 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
     var dispatchGroup = DispatchGroup()
     var date = Date()
     
+    
+    
+    
+    //MARK: View
     override func viewDidLoad() {
         dispatchGroup.enter()
         let child = SpinnerViewController()
@@ -49,7 +51,12 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
                 
     }
     
+    
+    
+    
+    //MARK: Send data and set delegate to get data back from next view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //in add-new-calendar mode
         if segue.identifier == "CreateCalendar" {
             let destination = segue.destination as! AddCalendarVC
             destination.delegate = self
@@ -57,6 +64,7 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
             destination.date = date
         }
         
+        //in update-calendar mode
         if segue.identifier == "UpdateCalendar"{
             let destination = segue.destination as! AddCalendarVC
             destination.delegate = self
@@ -66,6 +74,22 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
         }
     }
     
+    //delegate to get data from Add-new-calendar view
+    func AddCalendar(month: Int, year: Int) {
+        if list.firstIndex(of: "\(month)-\(year)") != nil{
+            dismiss(animated: true)
+        } else {
+            list.append("\(month)-\(year)")
+            dismiss(animated: true)
+            table.reloadData()
+        }
+    }
+    
+    
+    
+    
+    
+    //MARK: for table view
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dispatchGroup.enter()
         let child = SpinnerViewController()
@@ -102,17 +126,12 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
         return cell
     }
     
-    //delegate to get data from Add-new-calendar view
-    func AddCalendar(month: Int, year: Int) {
-        if list.firstIndex(of: "\(month)-\(year)") != nil{
-            dismiss(animated: true)
-        } else {
-            list.append("\(month)-\(year)")
-            dismiss(animated: true)
-            table.reloadData()
-        }
-    }
+
     
+    
+    
+    
+    //MARK: Spinner
     func startLoading(child: SpinnerViewController){
         addChild(child)
         child.view.frame = view.frame
@@ -125,4 +144,5 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
         child.view.removeFromSuperview()
         child.removeFromParent()
     }
+    
 }
