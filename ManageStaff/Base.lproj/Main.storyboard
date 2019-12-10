@@ -1003,17 +1003,8 @@
         </scene>
     </scenes>
     <resources>
-<<<<<<< HEAD
+
         <image name="avatar" width="125" height="125"/>
     </resources>
-=======
-        <image name="arrowtriangle.left.fill" catalog="system" width="64" height="56"/>
-        <image name="plus" catalog="system" width="64" height="56"/>
-        <image name="stop.fill" catalog="system" width="64" height="56"/>
-    </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="fv4-ya-bdC"/>
-        <segue reference="vwE-g9-UBr"/>
-    </inferredMetricsTieBreakers>
->>>>>>> 4bff3435a1480f97b20736ecd12421c7343a792b
+
 </document>
