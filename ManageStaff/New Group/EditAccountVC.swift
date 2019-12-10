@@ -63,17 +63,25 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             return
         }
         //store image to cloud
+        let child = SpinnerViewController()
+        self.startLoading(child: child)
+        storeImageandUpdateInfo(uid: userAccount.uid, completion: {urlImage in
+            print(urlImage)
+            let db = Firestore.firestore()
+            db.collection("users").document(userAccount.uid).updateData([
+                "name": self.textfieldName.text!,
+                "phone": self.textfieldPhone.text!,
+                "image": urlImage
+            ])
+            self.stopLoading(child: child)
+            self.delegate?.updateImageAvatar(image: self.imageviewAvatar.image!, phone: self.textfieldPhone.text!, name: self.textfieldName.text!)
+            self.dismiss(animated: true, completion: nil)
+        })
         
-        let db = Firestore.firestore()
-        db.collection("users").document(userAccount.uid).updateData([
-            "name": textfieldName.text!,
-            "phone": textfieldPhone.text!
-        ])
+        
         
         //update image in manage account view
-        delegate?.updateImageAvatar(image: imageviewAvatar.image!, phone: textfieldPhone.text!, name: textfieldName.text!)
         
-        self.dismiss(animated: true, completion: nil)
     }
     @IBAction func tapOnBack(_ sender: Any) {
         self.dismiss(animated: true, completion: nil)
@@ -86,9 +94,11 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         //load image avatr
         imageviewAvatar.image = imageAvatar
     }
-    func storeImageToCloud(uid: String){
+    
+    func storeImageandUpdateInfo(uid: String, completion: @escaping (String)->()){
         let storageRef = Storage.storage().reference().child(uid + ".png")
         let data = imageviewAvatar.image?.pngData()
+        
         imageAvatar = imageviewAvatar.image
         storageRef.putData(data!, metadata: nil) { (metadata, error) in
             // You can also access to download URL after upload.
@@ -98,10 +108,7 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
                     return
                 }
                 userAccount.image = downloadURL.absoluteString
-                let db = Firestore.firestore()
-                db.collection("users").document(uid).updateData([
-                    "image": userAccount.image
-                    ])
+                completion(userAccount.image)
             }
         }
     }

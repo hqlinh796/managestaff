@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vMg-KN-ddZ">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vMg-KN-ddZ">
+    <device id="retina6_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +15,7 @@
             <objects>
                 <viewController storyboardIdentifier="SignUpID" id="BYZ-38-t0r" customClass="SignUpVC" customModule="ManageStaff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Register" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3YY-6f-LOK">
@@ -195,7 +197,7 @@
             <objects>
                 <viewController storyboardIdentifier="ResetPasswordID" id="8wB-2r-aFw" customClass="ResetPasswordVC" customModule="ManageStaff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Uvd-RR-FSn">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email to reset..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-9V-iEm">
@@ -254,8 +256,8 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Manage Calendar" id="a2L-O3-3Xi">
-                                        <barButtonItem key="leftBarButtonItem" title="Back" image="arrowtriangle.left.fill" catalog="system" id="bHj-yB-8H3"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus" catalog="system" id="8Yk-f2-vI6">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" image="arrowtriangle.left.fill" id="bHj-yB-8H3"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Add" image="plus" id="8Yk-f2-vI6">
                                             <connections>
                                                 <segue destination="dAv-qy-KPl" kind="presentation" identifier="CreateCalendar" animates="NO" modalPresentationStyle="currentContext" modalTransitionStyle="coverVertical" id="reJ-6l-pdM"/>
                                             </connections>
@@ -265,13 +267,13 @@
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="c8j-9B-d8u">
                                 <rect key="frame" x="0.0" y="84" width="414" height="729"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="AhS-pY-TLU">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="AhS-pY-TLU" id="ABi-Qo-f9B">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -282,7 +284,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Plf-YE-wgn" firstAttribute="bottom" secondItem="c8j-9B-d8u" secondAttribute="bottom" id="5bj-Ge-Ff0"/>
                             <constraint firstItem="nMi-PP-S0q" firstAttribute="top" secondItem="Plf-YE-wgn" secondAttribute="top" id="5xp-U4-BkP"/>
@@ -325,7 +327,7 @@
                                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="UZ1-Vg-Cfg">
                                                 <rect key="frame" x="20" y="11" width="72" height="22"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Button" image="arrowtriangle.left.fill" catalog="system"/>
+                                                <state key="normal" title="Button" image="arrowtriangle.left.fill"/>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -333,13 +335,13 @@
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="aNa-Tj-6Ho">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="4Ho-TP-xgS">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.666667938232422"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4Ho-TP-xgS" id="PV6-49-n8m">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666667938232422"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -350,7 +352,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="khn-U8-5f5" firstAttribute="trailing" secondItem="aNa-Tj-6Ho" secondAttribute="trailing" id="8Sk-Mc-Icw"/>
                             <constraint firstItem="khn-U8-5f5" firstAttribute="bottom" secondItem="aNa-Tj-6Ho" secondAttribute="bottom" id="P7j-qT-gP4"/>
@@ -412,7 +414,7 @@
                             </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DXM-16-hTA" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="168" width="414" height="500"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="500" id="Z1P-Ae-4Yv"/>
                                 </constraints>
@@ -446,7 +448,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoO-YV-WoC">
                                 <rect key="frame" x="60" y="678" width="50" height="50"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="Twb-vd-ao2"/>
                                     <constraint firstAttribute="height" constant="50" id="eGg-XR-R2W"/>
@@ -464,7 +466,7 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PaQ-0v-grT">
                                 <rect key="frame" x="60" y="748" width="50" height="50"/>
-                                <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="lpM-Nd-Us3"/>
                                     <constraint firstAttribute="width" constant="50" id="ujJ-x8-vPo"/>
@@ -481,7 +483,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UBy-iO-F5i" firstAttribute="leading" secondItem="8nh-0t-Kdb" secondAttribute="leading" constant="50" id="2Ng-fC-onl"/>
                             <constraint firstItem="2FV-Zz-uoK" firstAttribute="leading" secondItem="EoO-YV-WoC" secondAttribute="trailing" constant="10" id="4fa-n0-Ogy"/>
@@ -522,7 +524,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fsr-JO-YCZ" customClass="FSCalendar">
                                 <rect key="frame" x="0.0" y="181" width="414" height="450"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="450" id="Zkm-ZG-ST2"/>
                                 </constraints>
@@ -587,8 +589,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stop.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ZEb-1I-XnM">
-                                <rect key="frame" x="30" y="723.33333333333337" width="30" height="25.333333333333371"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="stop.fill" translatesAutoresizingMaskIntoConstraints="NO" id="ZEb-1I-XnM">
+                                <rect key="frame" x="30" y="721" width="30" height="30"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -616,7 +618,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Fsr-JO-YCZ" firstAttribute="leading" secondItem="SJp-90-2dI" secondAttribute="leading" id="2yh-hf-KBJ"/>
                             <constraint firstItem="iFO-Mt-Rvn" firstAttribute="top" secondItem="SJp-90-2dI" secondAttribute="top" id="3DH-97-obE"/>
@@ -686,7 +688,7 @@
             <objects>
                 <viewController storyboardIdentifier="ManageAccountID" id="RUF-rI-8yf" customClass="ManageAccountVC" customModule="ManageStaff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iad-5c-2JM">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ARd-8m-7jV">
@@ -736,7 +738,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WSB-TJ-7Lf">
-                                <rect key="frame" x="107" y="428" width="200" height="200"/>
+                                <rect key="frame" x="107" y="482" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="TIl-By-leW"/>
                                     <constraint firstAttribute="width" secondItem="WSB-TJ-7Lf" secondAttribute="height" multiplier="1:1" id="tCI-d2-E3i"/>
@@ -901,7 +903,7 @@
             <objects>
                 <viewController storyboardIdentifier="CheckInID" id="q86-Cr-OoI" customClass="CheckInVC" customModule="ManageStaff" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="y2H-hd-GtJ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hBp-Hr-xYS">
@@ -922,7 +924,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCL-uv-E8x">
-                                <rect key="frame" x="147" y="534" width="100" height="30"/>
+                                <rect key="frame" x="147" y="588" width="100" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="vaV-eh-Lr2"/>
                                 </constraints>
@@ -1003,8 +1005,13 @@
         </scene>
     </scenes>
     <resources>
-
+        <image name="arrowtriangle.left.fill" width="16" height="16"/>
         <image name="avatar" width="125" height="125"/>
+        <image name="plus" width="16" height="16"/>
+        <image name="stop.fill" width="16" height="16"/>
     </resources>
-
+    <inferredMetricsTieBreakers>
+        <segue reference="a44-M9-KYT"/>
+        <segue reference="reJ-6l-pdM"/>
+    </inferredMetricsTieBreakers>
 </document>
