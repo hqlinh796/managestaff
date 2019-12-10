@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		95ABF9B124B0B7D1F3175F5C /* Pods_ManageStaffTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B65CF6330108F4DBDAE4F9B /* Pods_ManageStaffTests.framework */; };
 		A4D7F699EEB124D52E9062C4 /* Pods_ManageStaff_ManageStaffUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 749E439AABC8E0E4442169CF /* Pods_ManageStaff_ManageStaffUITests.framework */; };
+		B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B236DF32239DF749008EBBBA /* StaffVC.swift */; };
+		B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395D77239CD8A900E7E71E /* ManagerVC.swift */; };
+		B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2395D79239CDFE200E7E71E /* AddCalendar.swift */; };
+		B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F200B239F30DA005D1E49 /* RegisterVC.swift */; };
 		C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30BBDE923903468008C2956 /* ScanQRVC.swift */; };
 		C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3A238E142600A54877 /* AppDelegate.swift */; };
 		C34C5C3D238E142600A54877 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3C238E142600A54877 /* ViewController.swift */; };
@@ -54,6 +58,10 @@
 		749E439AABC8E0E4442169CF /* Pods_ManageStaff_ManageStaffUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageStaff_ManageStaffUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		932323EE860691FC0C08AEDA /* Pods-ManageStaff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaff.debug.xcconfig"; path = "Target Support Files/Pods-ManageStaff/Pods-ManageStaff.debug.xcconfig"; sourceTree = "<group>"; };
 		A6C0A23852FCBAA30C37828C /* Pods_ManageStaff.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ManageStaff.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B236DF32239DF749008EBBBA /* StaffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffVC.swift; sourceTree = "<group>"; };
+		B2395D77239CD8A900E7E71E /* ManagerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagerVC.swift; sourceTree = "<group>"; };
+		B2395D79239CDFE200E7E71E /* AddCalendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCalendar.swift; sourceTree = "<group>"; };
+		B25F200B239F30DA005D1E49 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		C30BBDE923903468008C2956 /* ScanQRVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRVC.swift; sourceTree = "<group>"; };
 		C34C5C37238E142600A54877 /* ManageStaff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageStaff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34C5C3A238E142600A54877 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -122,6 +130,33 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		B2395D76239CD79000E7E71E /* Signup Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				B23BECF8239EBC160080773C /* For staff */,
+				B23BECF7239EBC070080773C /* For manager */,
+			);
+			path = "Signup Calendar";
+			sourceTree = "<group>";
+		};
+		B23BECF7239EBC070080773C /* For manager */ = {
+			isa = PBXGroup;
+			children = (
+				B2395D77239CD8A900E7E71E /* ManagerVC.swift */,
+				B2395D79239CDFE200E7E71E /* AddCalendar.swift */,
+			);
+			path = "For manager";
+			sourceTree = "<group>";
+		};
+		B23BECF8239EBC160080773C /* For staff */ = {
+			isa = PBXGroup;
+			children = (
+				B236DF32239DF749008EBBBA /* StaffVC.swift */,
+				B25F200B239F30DA005D1E49 /* RegisterVC.swift */,
+			);
+			path = "For staff";
+			sourceTree = "<group>";
+		};
 		C34C5C2E238E142600A54877 = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +190,7 @@
 				C34C5C3C238E142600A54877 /* ViewController.swift */,
 				C34C5C49238E142800A54877 /* Info.plist */,
 				C34C5C3E238E142600A54877 /* Main.storyboard */,
+				B2395D76239CD79000E7E71E /* Signup Calendar */,
 			);
 			path = ManageStaff;
 			sourceTree = "<group>";
@@ -476,8 +512,12 @@
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
+				B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */,
+				B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */,
 				C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */,
+				B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */,
 				C3A0325C23959A32005FC134 /* Setting.swift in Sources */,
+				B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
