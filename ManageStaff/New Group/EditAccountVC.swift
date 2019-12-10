@@ -34,6 +34,9 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         //show info
         showUserInfo()
         // Do any additional setup after loading the view.
+        
+        //tap anywhere
+        self.dismissKeyboard()
     }
     
     
@@ -50,7 +53,6 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         let image = info[.originalImage]
         imageviewAvatar.image = image as! UIImage
         self.dismiss(animated: true, completion: nil)
-        
     }
     
     @IBAction func tapOnSave(_ sender: Any) {
@@ -61,7 +63,7 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             return
         }
         //store image to cloud
-        storeImageToCloud(uid: userAccount.uid)
+        
         let db = Firestore.firestore()
         db.collection("users").document(userAccount.uid).updateData([
             "name": textfieldName.text!,
@@ -112,6 +114,19 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         //show err
     }
     
+    func startLoading(child: SpinnerViewController){
+        addChild(child)
+        child.view.frame = view.frame
+        self.view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    //stop loading view
+    func stopLoading(child: SpinnerViewController){
+        child.willMove(toParent: nil)
+        child.view.removeFromSuperview()
+        child.removeFromParent()
+    }
     
 }
 

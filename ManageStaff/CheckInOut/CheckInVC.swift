@@ -17,7 +17,10 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         }
         textfiledQRCode.text = qrcode
         //find staff
+        let child = SpinnerViewController()
+        self.startLoading(child: child)
         findStaff(qrcode: qrcode)
+        self.stopLoading(child: child)
     }
     
 
@@ -32,6 +35,7 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
     
     @IBAction func tapOnSave(_ sender: Any) {
         //save user in check-in list
+        
     }
     @IBAction func tapOnScan(_ sender: Any) {
         labelError.isHidden = true
@@ -55,6 +59,19 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
     func showError(error: String){
         labelError.text = error
         labelError.isHidden = false
+    }
+    func startLoading(child: SpinnerViewController){
+        addChild(child)
+        child.view.frame = view.frame
+        self.view.addSubview(child.view)
+        child.didMove(toParent: self)
+    }
+    
+    //stop loading view
+    func stopLoading(child: SpinnerViewController){
+        child.willMove(toParent: nil)
+        child.view.removeFromSuperview()
+        child.removeFromParent()
     }
 
 }

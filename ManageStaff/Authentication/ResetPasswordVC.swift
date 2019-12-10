@@ -17,6 +17,9 @@ class ResetPasswordVC: UIViewController {
         super.viewDidLoad()
         labelError.isHidden = true
         // Do any additional setup after loading the view.
+        
+        //tap anywhere
+        //self.dismissKeyboard()
     }
     
    
@@ -30,7 +33,7 @@ class ResetPasswordVC: UIViewController {
                     print("Send email successfully")
                     //dismiss reset password screen
                     self.dismiss(animated: true, completion: {
-                        
+                        NotificationCenter.default.post(name: .init("AlertResetPassword"), object: nil)
                     })
                     //show alert
                 }

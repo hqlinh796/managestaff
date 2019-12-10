@@ -76,5 +76,7 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             session.stopRunning()
         }
     }
+    
+    
 
 }

@@ -9,20 +9,28 @@
 import UIKit
 import FirebaseAuth
 
+var isAlert = false
 class SignInVC: UIViewController {
 
+   
     @IBOutlet weak var textfieldEmail: UITextField!
     @IBOutlet weak var textfieldPassword: UITextField!
     @IBOutlet weak var labelError: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //subview
         labelError.isHidden = true
+        
+        //tap Anywhere
+        self.dismissKeyboard()
+
+        //alert reset password
+        NotificationCenter.default.addObserver(self, selector: #selector(presentAlert), name: NSNotification.Name(rawValue: "AlertResetPassword"), object: nil)
+        
     }
     
-    
-    
-    
+
     @IBAction func tapOnSignIn(_ sender: Any) {
         //validate input
         let err = validateInput()
@@ -52,10 +60,20 @@ class SignInVC: UIViewController {
         if ((textfieldEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)! || textfieldPassword.text!.isEmpty){
             return "Please fill all fields!"
         }
+        
         //check email has @
         if !textfieldEmail.text!.contains("@"){
             return "Email is incorrect!"
         }
+        
+        //check password
+        if !isValidPassword(password: textfieldPassword.text!){
+            return """
+            Password must contain: 1 number, 1 lower character,
+            1 uppper character and must has at least 8 characters
+            """
+        }
+        
         return ""
     }
     
@@ -72,4 +90,31 @@ class SignInVC: UIViewController {
             self.present(HomeVC, animated: true, completion: nil)
         }
     }
+    
+    //show alert reset password
+    @objc func presentAlert(){
+        let alert = UIAlertController(title: "Successful", message: "Please check your inbox mail and follow those steps to reset your password", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
+    }
+    
+    //check valid pass
+    func isValidPassword(password: String) -> Bool {
+        let passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
+        return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+    }
 }
+
+
+extension UIViewController{
+    @objc func dismissKeyboard(){
+        let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboardAction))
+        view.isUserInteractionEnabled = true
+        view.addGestureRecognizer(tapOnScreen)
+    }
+    @objc func dismissKeyboardAction(){
+        view.endEditing(true)
+    }
+}
+

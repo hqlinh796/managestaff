@@ -11,7 +11,7 @@ import FirebaseAuth
 import FirebaseFirestore
 
 var userAccount = user()
-var imageAvatar:UIImage?
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         let ref = db.collection("users").document(user!.uid)
         
         let child = SpinnerViewController()
-        startLoading(child: child)
+        self.startLoading(child: child)
         //load user info
         
             ref.getDocument { (document, error) in
@@ -64,7 +64,6 @@ class ViewController: UIViewController {
         child.view.removeFromSuperview()
         child.removeFromParent()
     }
-    
     
 }
 
