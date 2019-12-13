@@ -25,6 +25,7 @@ class ResetPasswordVC: UIViewController {
    
     //-----ACTION--------
     @IBAction func tapOnSendEmail(_ sender: Any) {
+        dismissKeyboardAction()
         //validate email
         guard let err = validateEmail(email: textfieldEmail.text!) else {
             //send email to reset

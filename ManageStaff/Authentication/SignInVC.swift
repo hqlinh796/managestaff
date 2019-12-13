@@ -32,6 +32,7 @@ class SignInVC: UIViewController {
     
 
     @IBAction func tapOnSignIn(_ sender: Any) {
+        dismissKeyboardAction()
         //validate input
         let err = validateInput()
         if !err.isEmpty{
@@ -85,9 +86,7 @@ class SignInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
-           //self.performSegue(withIdentifier: "alreadyLoggedIn", sender: nil)
-            let HomeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
-            self.present(HomeVC, animated: true, completion: nil)
+            navigateToMainNavigationView()
         }
     }
     
@@ -103,6 +102,17 @@ class SignInVC: UIViewController {
     func isValidPassword(password: String) -> Bool {
         let passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
+    }
+    
+    func navigateToMainNavigationView(){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else{
+            return
+        }
+        
+        mainNavigationVC.modalPresentationStyle = .fullScreen
+        
+        present(mainNavigationVC, animated: true, completion: nil)
     }
 }
 

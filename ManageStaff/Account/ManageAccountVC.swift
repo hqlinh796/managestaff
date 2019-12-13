@@ -53,17 +53,6 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
-    @IBAction func tapOnEdit(_ sender: Any) {
-        let EditAccountVC = storyboard?.instantiateViewController(withIdentifier: "EditAccountID") as! EditAccountVC
-        
-        EditAccountVC.delegate = self
-        present(EditAccountVC, animated: true, completion: nil)
-    }
-    @IBAction func tapOnBack(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
-    
     
     
     //------ FUNTION -------

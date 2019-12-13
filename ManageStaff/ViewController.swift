@@ -50,6 +50,19 @@ class ViewController: UIViewController {
             }
     }
     
+    @IBAction func ShowCalendarVC(_ sender: Any) {
+        if userAccount.role == "0"{
+            let CalendarVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarForStaff") as! StaffVC
+            self.present(CalendarVC, animated: true)
+        }
+        else {
+            let CalendarVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarForManager") as! ManagerVC
+            self.present(CalendarVC, animated: false, completion: nil)
+        }
+        
+    }
+    
+    
     //create and start loading view
     func startLoading(child: SpinnerViewController){
         addChild(child)

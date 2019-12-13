@@ -12,7 +12,12 @@ import Firebase
 class StaffVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
+    
     //MARK: outlets and variables
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     @IBOutlet weak var table: UITableView!
     var list: [String] = []
     var blockedDay: [Int] = []

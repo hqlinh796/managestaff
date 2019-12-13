@@ -14,6 +14,9 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
     
     //MARK: outlets and variables
     @IBOutlet weak var table: UITableView!
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
     
     //list of created calendar
     var list: [String] = []

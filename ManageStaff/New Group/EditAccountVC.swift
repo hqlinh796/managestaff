@@ -76,15 +76,9 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
             self.stopLoading(child: child)
             self.delegate?.updateImageAvatar(image: self.imageviewAvatar.image!, phone: self.textfieldPhone.text!, name: self.textfieldName.text!)
             self.dismiss(animated: true, completion: nil)
+            
+            //update image in manage account view
         })
-        
-        
-        
-        //update image in manage account view
-        
-    }
-    @IBAction func tapOnBack(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
     }
     
     func showUserInfo(){
