@@ -52,15 +52,18 @@ class ViewController: UIViewController {
     
     @IBAction func ShowCalendarVC(_ sender: Any) {
         if userAccount.role == "0"{
-            let CalendarVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarForStaff") as! StaffVC
-            self.present(CalendarVC, animated: true)
+            let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleForStaff") as! ScheduleNavigationVC
+            ScheduleVC.modalPresentationStyle = .fullScreen
+            self.present(ScheduleVC, animated: true)
         }
         else {
-            let CalendarVC = self.storyboard?.instantiateViewController(withIdentifier: "CalendarForManager") as! ManagerVC
-            self.present(CalendarVC, animated: false, completion: nil)
+            let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleForManager") as! ScheduleNavigationVC
+            ScheduleVC.modalPresentationStyle = .fullScreen
+            self.present(ScheduleVC, animated: false, completion: nil)
         }
         
     }
+    
     
     
     //create and start loading view

@@ -12,10 +12,12 @@ import Firebase
 class StaffVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
     
-    
+
     //MARK: outlets and variables
     @IBAction func BackButtonTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+        homeVC.modalPresentationStyle = .fullScreen
+        self.present(homeVC, animated: true)
     }
     
     @IBOutlet weak var table: UITableView!

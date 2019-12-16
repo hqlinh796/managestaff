@@ -48,6 +48,7 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
             UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
             
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(okAction)
         alert.addAction(cancelAction)

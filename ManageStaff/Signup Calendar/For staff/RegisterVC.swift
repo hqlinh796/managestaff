@@ -14,7 +14,12 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
     
     
     // MARK: outlets and variables
-    //handle save registration
+    
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
+    
+    
     @IBAction func saveTapped(_ sender: Any) {
         print(selectedDay)
     }

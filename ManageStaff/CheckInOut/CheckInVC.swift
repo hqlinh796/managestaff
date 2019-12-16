@@ -43,6 +43,7 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         ScanQRVC.delegate = self
         self.present(ScanQRVC, animated: false, completion: nil)
     }
+    
     func findStaff(qrcode: String){
         let db = Firestore.firestore()
         db.collection("users").document(qrcode).getDocument { (document, error) in

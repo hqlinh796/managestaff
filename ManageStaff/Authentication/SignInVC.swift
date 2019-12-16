@@ -47,8 +47,7 @@ class SignInVC: UIViewController {
                 return
             }else{
                 //transition to home screen
-                let HomeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
-                self.present(HomeVC, animated: true, completion: nil)
+                self.navigateToMainNavigationView()
                 
             }
         }
@@ -114,6 +113,7 @@ class SignInVC: UIViewController {
         
         present(mainNavigationVC, animated: true, completion: nil)
     }
+    
 }
 
 
