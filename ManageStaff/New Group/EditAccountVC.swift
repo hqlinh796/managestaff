@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseStorage
 import FirebaseFirestore
+import Firebase
 
 protocol updateImageDelegate{
     func updateImageAvatar(image: UIImage, phone: String, name: String)
@@ -67,12 +68,13 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         self.startLoading(child: child)
         storeImageandUpdateInfo(uid: userAccount.uid, completion: {urlImage in
             print(urlImage)
-            let db = Firestore.firestore()
-            db.collection("users").document(userAccount.uid).updateData([
+            let ref : DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("users").child(userAccount.uid).updateChildValues([
                 "name": self.textfieldName.text!,
                 "phone": self.textfieldPhone.text!,
-                "image": urlImage
-            ])
+                "imgURL": urlImage
+                ])
             self.stopLoading(child: child)
             self.delegate?.updateImageAvatar(image: self.imageviewAvatar.image!, phone: self.textfieldPhone.text!, name: self.textfieldName.text!)
             self.dismiss(animated: true, completion: nil)

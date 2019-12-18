@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import FirebaseFirestore
+import Firebase
 
 class CheckInVC: UIViewController, scanQRCodeDelegate {
     func sendQRCode(qrcode: String) {
@@ -23,7 +23,11 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         self.stopLoading(child: child)
     }
     
-
+    @IBOutlet weak var labelNotif: UILabel!
+    var ref : DatabaseReference!
+    var currentYear : String?
+    var currentMonth: String?
+    var currentDate: String?
     @IBOutlet weak var labelError: UILabel!
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelPhone: UILabel!
@@ -31,28 +35,39 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelError.isHidden = true
+        labelNotif.isHidden = true
+        //get current Year and Month
+        let calendar = Calendar.current
+        let date = Date()
+        currentYear = String(calendar.component(.year, from: date))
+        currentMonth = String(calendar.component(.month, from: date))
+        currentDate = String(calendar.component(.day, from: date))
+        
+        ref = Database.database().reference()
     }
     
     @IBAction func tapOnSave(_ sender: Any) {
+        //validate before save
+        print("SAVE----------")
+        let arrayName = ["Linh", "Na"]
         //save user in check-in list
-        
+        let childYear = "Year " + currentYear!
+        let childMonth = "Month " + currentMonth!
+       ref.child("checkin").child(childYear).child(childMonth).child("123").updateChildValues(<#T##values: [AnyHashable : Any]##[AnyHashable : Any]#>)
+        labelNotif.isHidden = false
     }
     @IBAction func tapOnScan(_ sender: Any) {
+        labelNotif.isHidden = true
         labelError.isHidden = true
         let ScanQRVC = storyboard?.instantiateViewController(withIdentifier: "ScanQRID") as! ScanQRVC
         ScanQRVC.delegate = self
         self.present(ScanQRVC, animated: false, completion: nil)
     }
     func findStaff(qrcode: String){
-        let db = Firestore.firestore()
-        db.collection("users").document(qrcode).getDocument { (document, error) in
-            if let err = error{
-                self.showError(error: "Can't find that ID")
-                return
-            }
-            let data = document?.data()
-            self.labelName.text = data!["name"] as? String
-            self.labelPhone.text = data!["phone"] as? String
+        ref.child("users").child(qrcode).observe(.value) { (DataSnapshot) in
+            let value = DataSnapshot.value as? NSDictionary
+            self.labelName.text = value?["name"] as? String
+            self.labelPhone.text = value?["phone"] as? String
         }
     }
     

@@ -51,7 +51,6 @@ class ScanQRVC: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
             guard let stringValue = readableObject.stringValue else {return}
             AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
             
-            let CheckInVC = storyboard?.instantiateViewController(withIdentifier: "CheckInID") as! CheckInVC
             //CheckInVC.textfiledQRCode.text = stringValue
             self.delegate?.sendQRCode(qrcode: stringValue)
             self.dismiss(animated: false, completion: nil)

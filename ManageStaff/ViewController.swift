@@ -8,37 +8,37 @@
 
 import UIKit
 import FirebaseAuth
-import FirebaseFirestore
+import Firebase
 
 var userAccount = user()
-
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let db = Firestore.firestore()
         let user = Auth.auth().currentUser
-        let ref = db.collection("users").document(user!.uid)
+        
+        var ref : DatabaseReference!
+        ref = Database.database().reference()
         
         let child = SpinnerViewController()
         self.startLoading(child: child)
         //load user info
         
-            ref.getDocument { (document, error) in
-                if let document = document {
-                    let data = document.data()
-                    userAccount.name = data!["name"] as? String ?? ""
-                    userAccount.phone = data!["phone"] as? String ?? ""
-                    userAccount.role = data!["role"] as? String ?? ""
-                    userAccount.image = data!["image"] as? String ?? ""
-                    self.load(url: URL(string: userAccount.image)!)
-                    self.stopLoading(child: child)
-                } else {
-                    print("Can't load user info")
-                }
-            }
-            userAccount.email = user!.email!
-            userAccount.uid = user?.uid ?? ""
+        ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            userAccount.email = value?["email"] as? String ?? ""
+            userAccount.name = value?["name"] as? String ?? ""
+            userAccount.phone = value?["phone"] as? String ?? ""
+            userAccount.role = value?["role"] as? String ?? ""
+            userAccount.uid = user!.uid
+            userAccount.image = value?["imgURL"] as? String ?? ""
+            self.load(url: URL(string: userAccount.image)!)
+            self.stopLoading(child: child)
+            // ...
+        }) { (error) in
+            print("Can't load user info")
+        }
     }
     
     //-----FUNCTION-------
