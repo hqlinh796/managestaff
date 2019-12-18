@@ -12,8 +12,16 @@ import Firebase
 class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, AddCalendarDelegate{
 
     
+
     //MARK: outlets and variables
     @IBOutlet weak var table: UITableView!
+    
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
+        homeVC.modalPresentationStyle = .fullScreen
+        self.present(homeVC, animated: true)
+    }
+
     
     //list of created calendar
     var list: [String] = []

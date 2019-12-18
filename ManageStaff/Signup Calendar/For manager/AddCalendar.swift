@@ -25,6 +25,9 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     var date = Date()
     var blockedDay: [Int] = []
     var delegate:AddCalendarDelegate?
+    @IBAction func BackButtonTapped(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
     
     
     
@@ -42,8 +45,6 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
         }
     }
 
-    
-    
     
     
     //MARK: handle save button

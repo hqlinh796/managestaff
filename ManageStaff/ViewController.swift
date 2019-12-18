@@ -50,6 +50,22 @@ class ViewController: UIViewController {
             }
     }
     
+    @IBAction func ShowCalendarVC(_ sender: Any) {
+        if userAccount.role == "0"{
+            let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleForStaff") as! ScheduleNavigationVC
+            ScheduleVC.modalPresentationStyle = .fullScreen
+            self.present(ScheduleVC, animated: true)
+        }
+        else {
+            let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "ScheduleForManager") as! ScheduleNavigationVC
+            ScheduleVC.modalPresentationStyle = .fullScreen
+            self.present(ScheduleVC, animated: false, completion: nil)
+        }
+        
+    }
+    
+    
+    
     //create and start loading view
     func startLoading(child: SpinnerViewController){
         addChild(child)

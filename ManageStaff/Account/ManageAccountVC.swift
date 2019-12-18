@@ -48,22 +48,12 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
             UIApplication.shared.keyWindow?.rootViewController?.dismiss(animated: false, completion: nil)
             
         }
+        
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(okAction)
         alert.addAction(cancelAction)
         present(alert, animated: true, completion: nil)
     }
-    @IBAction func tapOnEdit(_ sender: Any) {
-        let EditAccountVC = storyboard?.instantiateViewController(withIdentifier: "EditAccountID") as! EditAccountVC
-        
-        EditAccountVC.delegate = self
-        present(EditAccountVC, animated: true, completion: nil)
-    }
-    @IBAction func tapOnBack(_ sender: Any) {
-        self.dismiss(animated: false, completion: nil)
-    }
-    
-    
     
     
     //------ FUNTION -------

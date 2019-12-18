@@ -63,6 +63,7 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         ScanQRVC.delegate = self
         self.present(ScanQRVC, animated: false, completion: nil)
     }
+    
     func findStaff(qrcode: String){
         ref.child("users").child(qrcode).observe(.value) { (DataSnapshot) in
             let value = DataSnapshot.value as? NSDictionary

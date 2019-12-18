@@ -37,7 +37,7 @@ class SignUpVC: UIViewController {
     
     
     @IBAction func tapOnSignUp(_ sender: Any) {
-        
+        dismissKeyboardAction()
         //Validate input
         let err = validateInput()
         if !err.isEmpty {
@@ -76,16 +76,15 @@ class SignUpVC: UIViewController {
                 "name": self.textfieldName.text!,
                 "phone": self.textfieldPhone.text!,
                 "image": self.urlImage,
-                "role": "",
+                "role": "0",
                 "uid": Result!.user.uid
             ]) { err in
                 if err != nil {
-                    self.showError(error: "Failt to create account, check your input and try again!")
+                    self.showError(error: "Failed to create account, check your input and try again!")
                     return
                 }else{
                     //Transition to home screen
-                    let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
-                    self.present(homeVC, animated: true, completion: nil)
+                    self.navigateToMainNavigationView()
                 }
             }
  */
@@ -157,6 +156,17 @@ class SignUpVC: UIViewController {
         child.removeFromParent()
     }
     
+    
+    func navigateToMainNavigationView(){
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else{
+            return
+        }
+        
+        mainNavigationVC.modalPresentationStyle = .fullScreen
+        
+        present(mainNavigationVC, animated: true, completion: nil)
+    }
     
 }
 
