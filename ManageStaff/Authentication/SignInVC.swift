@@ -19,6 +19,7 @@ class SignInVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
         //subview
         labelError.isHidden = true
         
@@ -47,8 +48,9 @@ class SignInVC: UIViewController {
                 return
             }else{
                 //transition to home screen
-                self.navigateToMainNavigationView()
-                
+                let HomeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
+                //self.navigateToMainNavigationView()
+                self.present(HomeVC, animated: true, completion: nil)
             }
         }
         
@@ -85,7 +87,10 @@ class SignInVC: UIViewController {
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
-            navigateToMainNavigationView()
+            //navigateToMainNavigationView()
+            let HomeVC = storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
+            //self.navigateToMainNavigationView()
+            self.present(HomeVC, animated: true, completion: nil)
         }
     }
     
@@ -103,6 +108,7 @@ class SignInVC: UIViewController {
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
     
+    /*
     func navigateToMainNavigationView(){
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else{
@@ -113,6 +119,7 @@ class SignInVC: UIViewController {
         
         present(mainNavigationVC, animated: true, completion: nil)
     }
+ */
     
 }
 

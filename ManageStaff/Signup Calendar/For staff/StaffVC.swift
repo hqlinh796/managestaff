@@ -15,9 +15,7 @@ class StaffVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
     //MARK: outlets and variables
     @IBAction func BackButtonTapped(_ sender: Any) {
-        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
-        homeVC.modalPresentationStyle = .fullScreen
-        self.present(homeVC, animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
     
     @IBOutlet weak var table: UITableView!

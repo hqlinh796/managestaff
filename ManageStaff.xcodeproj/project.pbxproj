@@ -30,6 +30,9 @@
 		C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3976361239029B80017C0A9 /* CheckInVC.swift */; };
 		C3A0325C23959A32005FC134 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325B23959A32005FC134 /* Setting.swift */; };
 		C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */; };
+		C3B6B7BB23ABD92F001BD4AB /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */; };
+		C3B6B7BD23ABD968001BD4AB /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */; };
+		C3CA668B23AA96A1006BD50F /* SpreadsheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */; };
 		C3E7BB04239B2DF800FBE44B /* ResetPasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E7BB03239B2DF800FBE44B /* ResetPasswordVC.swift */; };
 		C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3F04612239128100025B761 /* ManageAccountVC.swift */; };
 		E3CCBDD9CCDFC6CB4E5BBEBA /* Pods_ManageStaff.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A6C0A23852FCBAA30C37828C /* Pods_ManageStaff.framework */; };
@@ -87,6 +90,9 @@
 		C3976361239029B80017C0A9 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
 		C3A0325B23959A32005FC134 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditAccountVC.swift; path = "../New Group/EditAccountVC.swift"; sourceTree = "<group>"; };
+		C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
+		C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
+		C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetVC.swift; sourceTree = "<group>"; };
 		C3E7BB03239B2DF800FBE44B /* ResetPasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordVC.swift; sourceTree = "<group>"; };
 		C3F04612239128100025B761 /* ManageAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageAccountVC.swift; sourceTree = "<group>"; };
 		F456E9CA01BE0B1715B76068 /* Pods-ManageStaff.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ManageStaff.release.xcconfig"; path = "Target Support Files/Pods-ManageStaff/Pods-ManageStaff.release.xcconfig"; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 		C34C5C39238E142600A54877 /* ManageStaff */ = {
 			isa = PBXGroup;
 			children = (
+				C3A4834323AA0387009BAA7B /* Report */,
 				C3A032612395DB54005FC134 /* System */,
 				C3A032602395DB2C005FC134 /* CheckInOut */,
 				C3A0325F2395DB13005FC134 /* Account */,
@@ -257,6 +264,16 @@
 				C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */,
 			);
 			path = System;
+			sourceTree = "<group>";
+		};
+		C3A4834323AA0387009BAA7B /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */,
+				C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */,
+				C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		DCC5A18436F7C6C029C08A33 /* Frameworks */ = {
@@ -513,9 +530,11 @@
 				C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */,
 				C34C5C43238E142600A54877 /* ManageStaff.xcdatamodeld in Sources */,
 				C34C5C3D238E142600A54877 /* ViewController.swift in Sources */,
+				C3B6B7BD23ABD968001BD4AB /* ContentCollectionViewCell.swift in Sources */,
 				C3E7BB04239B2DF800FBE44B /* ResetPasswordVC.swift in Sources */,
 				C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */,
 				B23F71F423A34D920097C725 /* MainNavigationController.swift in Sources */,
+				C3B6B7BB23ABD92F001BD4AB /* CustomCollectionViewLayout.swift in Sources */,
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
@@ -524,6 +543,7 @@
 				C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */,
 				B2B15EBD23A75FC500C0D2C5 /* ScheduleNavigationVC.swift in Sources */,
 				B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */,
+				C3CA668B23AA96A1006BD50F /* SpreadsheetVC.swift in Sources */,
 				C3A0325C23959A32005FC134 /* Setting.swift in Sources */,
 				B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */,
 			);
@@ -703,6 +723,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JRV6WJL473;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ManageStaff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -710,6 +734,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/administrator/Documents/File XCode/BT/CK/ManageStaff/ManageStaff/NGrid.framework/Headers/NGrid.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -722,6 +747,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JRV6WJL473;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = ManageStaff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -729,6 +758,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/administrator/Documents/File XCode/BT/CK/ManageStaff/ManageStaff/NGrid.framework/Headers/NGrid.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

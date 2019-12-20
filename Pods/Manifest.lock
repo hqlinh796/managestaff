@@ -288,6 +288,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - SwiftSpreadsheet (1.2.1)
 
 DEPENDENCIES:
   - Firebase/Analytics
@@ -297,6 +298,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - Firebase/Storage
   - FSCalendar
+  - SwiftSpreadsheet
 
 SPEC REPOS:
   trunk:
@@ -323,6 +325,7 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - SwiftSpreadsheet
 
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
@@ -348,7 +351,8 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  SwiftSpreadsheet: b3dc6d89bd5fd18f38fe88c29898fbc481660a04
 
-PODFILE CHECKSUM: 144a11e1f6e17adee75e5820871b0e9e6bd7cdb1
+PODFILE CHECKSUM: b8da2b177d5dda1f1d1fe0a7289559abe8a5353c
 
 COCOAPODS: 1.8.4

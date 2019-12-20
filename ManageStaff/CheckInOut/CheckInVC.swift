@@ -12,7 +12,7 @@ import Firebase
 class CheckInVC: UIViewController, scanQRCodeDelegate {
     func sendQRCode(qrcode: String) {
         if qrcode.isEmpty{
-            showError(error: "Can't scan QR Code")
+            showNotif(notif: "Can't scan QR Code")
             return
         }
         textfiledQRCode.text = qrcode
@@ -27,41 +27,59 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
     var ref : DatabaseReference!
     var currentYear : String?
     var currentMonth: String?
-    var currentDate: String?
-    @IBOutlet weak var labelError: UILabel!
+    var currentDay: String?
+   
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelPhone: UILabel!
     @IBOutlet weak var textfiledQRCode: UITextField!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelError.isHidden = true
+        
         labelNotif.isHidden = true
-        //get current Year and Month
-        let calendar = Calendar.current
-        let date = Date()
-        currentYear = String(calendar.component(.year, from: date))
-        currentMonth = String(calendar.component(.month, from: date))
-        currentDate = String(calendar.component(.day, from: date))
+        //get current Date
+        getDate()
         
         ref = Database.database().reference()
     }
     
     @IBAction func tapOnSave(_ sender: Any) {
         //validate before save
-        print("SAVE----------")
-        let arrayName = ["Linh", "Na"]
+        
+        
         //save user in check-in list
-        let childYear = "Year " + currentYear!
-        let childMonth = "Month " + currentMonth!
-       ref.child("checkin").child(childYear).child(childMonth).child("123").updateChildValues(<#T##values: [AnyHashable : Any]##[AnyHashable : Any]#>)
+
+        let key = currentYear! + currentMonth! + currentDay! + textfiledQRCode.text!
+        ref.child("checkin").child(key).setValue([
+        "id": textfiledQRCode.text!,
+        "date": currentYear! + currentMonth! + currentDay!
+    ])
         labelNotif.isHidden = false
     }
     @IBAction func tapOnScan(_ sender: Any) {
         labelNotif.isHidden = true
-        labelError.isHidden = true
+      
         let ScanQRVC = storyboard?.instantiateViewController(withIdentifier: "ScanQRID") as! ScanQRVC
         ScanQRVC.delegate = self
         self.present(ScanQRVC, animated: false, completion: nil)
+    }
+    
+    
+    @IBAction func tapOnBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    func getDate(){
+        let calendar = Calendar.current
+        let date = Date()
+        currentYear = String(calendar.component(.year, from: date))
+        currentMonth = String(calendar.component(.month, from: date))
+        currentDay = String(calendar.component(.day, from: date))
+        if currentDay?.count == 1{
+            currentDay = "0" + currentDay!
+        }
     }
     
     func findStaff(qrcode: String){
@@ -72,9 +90,9 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         }
     }
     
-    func showError(error: String){
-        labelError.text = error
-        labelError.isHidden = false
+    func showNotif(notif: String){
+        labelNotif.text = notif
+        labelNotif.isHidden = false
     }
     func startLoading(child: SpinnerViewController){
         addChild(child)

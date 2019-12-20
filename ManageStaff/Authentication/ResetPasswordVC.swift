@@ -45,6 +45,11 @@ class ResetPasswordVC: UIViewController {
     }
     
     
+    @IBAction func tapOnBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     //--------FUNCTION---------
     func validateEmail(email: String) -> String?{

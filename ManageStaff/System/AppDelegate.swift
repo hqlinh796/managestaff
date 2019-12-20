@@ -18,6 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        self.window!.backgroundColor = UIColor.white
+        let mainController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "SignInID") as! SignInVC
+        
+        self.window!.rootViewController = mainController
+        self.window!.makeKeyAndVisible()
         FirebaseApp.configure()
         return true
     }

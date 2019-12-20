@@ -17,9 +17,7 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
     @IBOutlet weak var table: UITableView!
     
     @IBAction func BackButtonTapped(_ sender: Any) {
-        let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "MainNavigationController") as! MainNavigationController
-        homeVC.modalPresentationStyle = .fullScreen
-        self.present(homeVC, animated: true)
+        self.dismiss(animated: true, completion: nil)
     }
 
     

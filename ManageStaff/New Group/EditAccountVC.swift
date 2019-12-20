@@ -83,6 +83,11 @@ class EditAccountVC: UIViewController, UIImagePickerControllerDelegate, UINaviga
         })
     }
     
+    
+    @IBAction func tapOnBack(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     func showUserInfo(){
         self.textfieldEmail.text = userAccount.email
         self.textfieldPhone.text = userAccount.phone
