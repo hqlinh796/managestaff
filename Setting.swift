@@ -11,11 +11,16 @@ import UIKit
 
 class user{
     var email: String = ""
-    var name: String = ""
+    var firstname: String = ""
+    var lastname: String = ""
+    var sex: String = ""
+    var department: String = ""
     var phone: String  = ""
     var role: String = ""
+    var leaderid: String = ""
     var uid: String = ""
     var image: String = ""
+    var salary: String = ""
 }
 
 class SpinnerViewController: UIViewController {
@@ -33,6 +38,14 @@ class SpinnerViewController: UIViewController {
         spinner.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
+}
+
+class filter{
+    var sex: [String] = []
+    var department: [String] = []
+    var role: [String] = []
+    var month = ""
+    var year = ""
 }
 
 

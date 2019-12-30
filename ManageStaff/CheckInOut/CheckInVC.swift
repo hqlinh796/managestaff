@@ -51,9 +51,10 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         //save user in check-in list
 
         let key = currentYear! + currentMonth! + currentDay! + textfiledQRCode.text!
-        ref.child("checkin").child(key).setValue([
-        "id": textfiledQRCode.text!,
-        "date": currentYear! + currentMonth! + currentDay!
+        ref.child("attendance").child(key).setValue([
+        "staffid": textfiledQRCode.text!,
+        "time": NSDate().timeIntervalSince1970,
+        "shiftleaderid": userAccount.uid
     ])
         labelNotif.isHidden = false
     }
@@ -76,6 +77,9 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         let date = Date()
         currentYear = String(calendar.component(.year, from: date))
         currentMonth = String(calendar.component(.month, from: date))
+        if currentMonth?.count == 1{
+            currentMonth = "0" + currentMonth!
+        }
         currentDay = String(calendar.component(.day, from: date))
         if currentDay?.count == 1{
             currentDay = "0" + currentDay!

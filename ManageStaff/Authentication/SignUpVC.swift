@@ -17,13 +17,15 @@ class SignUpVC: UIViewController {
    
     @IBOutlet weak var textfieldEmail: UITextField!
     @IBOutlet weak var textfieldPassword: UITextField!
-    @IBOutlet weak var textfieldConfirmPassword: UITextField!
     @IBOutlet weak var textfieldName: UITextField!
     @IBOutlet weak var labelError: UILabel!
     @IBOutlet weak var textfieldPhone: UITextField!
     @IBOutlet weak var imageviewAvatar: UIImageView!
+    @IBOutlet weak var textfieldLastName: UITextField!
+    @IBOutlet weak var buttonSex: UIButton!
     
     var urlImage = "https://firebasestorage.googleapis.com/v0/b/managestaff-cc156.appspot.com/o/Zjw7LLp3ctNOArBplgmxN8kmjoW2.png?alt=media&token=02a55f39-691b-488a-b15a-a712d36ea484"
+    var sex = "Nữ"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,38 +58,24 @@ class SignUpVC: UIViewController {
             
             //store user to database realtime
             
-            print("ID: ----------" + Result!.user.uid)
+            
             let ref : DatabaseReference!
             ref = Database.database().reference().child("users")
             ref.child(Result!.user.uid).setValue([
                 "email": self.textfieldEmail.text!,
-                "name": self.textfieldName.text!,
+                "firstname": self.textfieldName.text!,
+                "lastname": self.textfieldLastName.text!,
+                "sex": self.sex,
                 "phone": self.textfieldPhone.text!,
-                "role": "1",
-                "imgURL": self.urlImage
+                "department": "",
+                "leaderid": "",
+                "role": "Nhân viên",
+                "imgurl": self.urlImage,
+                "salery": 0
                 ])
     
             let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
             self.present(homeVC, animated: true, completion: nil)
-            /*
-            let db = Firestore.firestore()
-            
-            db.collection("users").document(Result!.user.uid).setData([
-                "name": self.textfieldName.text!,
-                "phone": self.textfieldPhone.text!,
-                "image": self.urlImage,
-                "role": "0",
-                "uid": Result!.user.uid
-            ]) { err in
-                if err != nil {
-                    self.showError(error: "Failed to create account, check your input and try again!")
-                    return
-                }else{
-                    //Transition to home screen
-                    self.navigateToMainNavigationView()
-                }
-            }
- */
         }
     }
     
@@ -96,6 +84,21 @@ class SignUpVC: UIViewController {
     }
     
     
+    @IBAction func tapOnSex(_ sender: Any) {
+        if buttonSex.isSelected {
+            buttonSex.isSelected = false
+            sex = "Nữ"
+        }else{
+            buttonSex.isSelected = true
+            sex = "Nam"
+        }
+    }
+    
+    
+    
+    
+    //------FUNCTION HEPLER
+    
     func showError(error: String){
         labelError.text = error
         labelError.isHidden = false
@@ -103,26 +106,19 @@ class SignUpVC: UIViewController {
     
     func validateInput() -> String{
         //check empty
-        if (textfieldName.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || textfieldEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || textfieldPassword.text!.isEmpty || textfieldConfirmPassword.text!.isEmpty || textfieldPhone.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
+        if (textfieldName.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || textfieldEmail.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty || textfieldPassword.text!.isEmpty || textfieldPhone.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty) {
             return "Please fill all fields!"
         }
         //check email has @
         if !textfieldEmail.text!.contains("@"){
             return "Email is incorrect!"
         }
-        //check password and password confirm
-        if textfieldPassword.text! != textfieldConfirmPassword.text!{
-            return "Password confirm is incorrect!"
-        }
+        
         if !isValidPassword(password: textfieldPassword.text!){
             return """
             Password must contain: 1 number, 1 lower character,
                     1 uppper character and must has at least 8 characters
             """
-        }
-        //check name has at least 2 words
-        if !textfieldName.text!.trimmingCharacters(in: .whitespacesAndNewlines).contains(" "){
-            return "Fill full name"
         }
         //check if phone is not number
         if Int(textfieldPhone.text!) == nil {

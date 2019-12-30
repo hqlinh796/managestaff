@@ -14,9 +14,9 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A57E2EE15E62C9625CB93EFB2710900C"
-               BuildableName = "SwiftSpreadsheet.framework"
-               BlueprintName = "SwiftSpreadsheet"
+               BlueprintIdentifier = "E9F9401E9C74C0C393164FD8D86D0068"
+               BuildableName = "DropDown.framework"
+               BlueprintName = "DropDown"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

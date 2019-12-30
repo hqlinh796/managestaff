@@ -84,6 +84,7 @@ class SignInVC: UIViewController {
         labelError.isHidden = false
     }
     
+    
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {

@@ -15,7 +15,11 @@
 		B23F71F423A34D920097C725 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B23F71F323A34D920097C725 /* MainNavigationController.swift */; };
 		B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B25F200B239F30DA005D1E49 /* RegisterVC.swift */; };
 		B2B15EBD23A75FC500C0D2C5 /* ScheduleNavigationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B15EBC23A75FC500C0D2C5 /* ScheduleNavigationVC.swift */; };
+		C3064C9123B496D700CAA6C0 /* SortTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3064C9023B496D700CAA6C0 /* SortTVC.swift */; };
 		C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C30BBDE923903468008C2956 /* ScanQRVC.swift */; };
+		C319651E23B8F05300668C5F /* UpdateEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319651D23B8F05300668C5F /* UpdateEmailVC.swift */; };
+		C319652023B8F06700668C5F /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C319651F23B8F06700668C5F /* UpdatePasswordVC.swift */; };
+		C3210B9F23B36C0D00D89D09 /* AdvancedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3210B9E23B36C0D00D89D09 /* AdvancedVC.swift */; };
 		C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3A238E142600A54877 /* AppDelegate.swift */; };
 		C34C5C3D238E142600A54877 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C3C238E142600A54877 /* ViewController.swift */; };
 		C34C5C40238E142600A54877 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C34C5C3E238E142600A54877 /* Main.storyboard */; };
@@ -25,11 +29,11 @@
 		C34C5C53238E142800A54877 /* ManageStaffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C52238E142800A54877 /* ManageStaffTests.swift */; };
 		C34C5C5E238E142800A54877 /* ManageStaffUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C5D238E142800A54877 /* ManageStaffUITests.swift */; };
 		C34C5C6C238E14B400A54877 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */; };
+		C372CDF323B5FAE400F997EA /* FilterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372CDF223B5FAE400F997EA /* FilterTVC.swift */; };
 		C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635C238FE4E70017C0A9 /* SignUpVC.swift */; };
 		C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635E238FE5010017C0A9 /* SignInVC.swift */; };
 		C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3976361239029B80017C0A9 /* CheckInVC.swift */; };
 		C3A0325C23959A32005FC134 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325B23959A32005FC134 /* Setting.swift */; };
-		C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */; };
 		C3B6B7BB23ABD92F001BD4AB /* CustomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */; };
 		C3B6B7BD23ABD968001BD4AB /* ContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */; };
 		C3CA668B23AA96A1006BD50F /* SpreadsheetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */; };
@@ -69,7 +73,11 @@
 		B23F71F323A34D920097C725 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		B25F200B239F30DA005D1E49 /* RegisterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		B2B15EBC23A75FC500C0D2C5 /* ScheduleNavigationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleNavigationVC.swift; sourceTree = "<group>"; };
+		C3064C9023B496D700CAA6C0 /* SortTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortTVC.swift; sourceTree = "<group>"; };
 		C30BBDE923903468008C2956 /* ScanQRVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanQRVC.swift; sourceTree = "<group>"; };
+		C319651D23B8F05300668C5F /* UpdateEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateEmailVC.swift; sourceTree = "<group>"; };
+		C319651F23B8F06700668C5F /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
+		C3210B9E23B36C0D00D89D09 /* AdvancedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedVC.swift; sourceTree = "<group>"; };
 		C34C5C37238E142600A54877 /* ManageStaff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ManageStaff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34C5C3A238E142600A54877 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C34C5C3C238E142600A54877 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -85,11 +93,11 @@
 		C34C5C5D238E142800A54877 /* ManageStaffUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageStaffUITests.swift; sourceTree = "<group>"; };
 		C34C5C5F238E142800A54877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C372CDF223B5FAE400F997EA /* FilterTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTVC.swift; sourceTree = "<group>"; };
 		C397635C238FE4E70017C0A9 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C397635E238FE5010017C0A9 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		C3976361239029B80017C0A9 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
-		C3A0325B23959A32005FC134 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
-		C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditAccountVC.swift; path = "../New Group/EditAccountVC.swift"; sourceTree = "<group>"; };
+		C3A0325B23959A32005FC134 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Setting.swift; path = ../Setting.swift; sourceTree = "<group>"; };
 		C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewLayout.swift; sourceTree = "<group>"; };
 		C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCollectionViewCell.swift; sourceTree = "<group>"; };
 		C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpreadsheetVC.swift; sourceTree = "<group>"; };
@@ -168,10 +176,18 @@
 			path = "For staff";
 			sourceTree = "<group>";
 		};
-		C34C5C2E238E142600A54877 = {
+		C3210BA023B3748500D89D09 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				C3A0325B23959A32005FC134 /* Setting.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		C34C5C2E238E142600A54877 = {
+			isa = PBXGroup;
+			children = (
+				C3210BA023B3748500D89D09 /* Settings */,
 				C34C5C39238E142600A54877 /* ManageStaff */,
 				C34C5C51238E142800A54877 /* ManageStaffTests */,
 				C34C5C5C238E142800A54877 /* ManageStaffUITests */,
@@ -226,6 +242,17 @@
 			path = ManageStaffUITests;
 			sourceTree = "<group>";
 		};
+		C372CDE923B5E8FC00F997EA /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				C3064C9023B496D700CAA6C0 /* SortTVC.swift */,
+				C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */,
+				C372CDF223B5FAE400F997EA /* FilterTVC.swift */,
+				C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		C3976360238FEB000017C0A9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,7 +267,8 @@
 			isa = PBXGroup;
 			children = (
 				C3F04612239128100025B761 /* ManageAccountVC.swift */,
-				C3A0325D2395DB0A005FC134 /* EditAccountVC.swift */,
+				C319651D23B8F05300668C5F /* UpdateEmailVC.swift */,
+				C319651F23B8F06700668C5F /* UpdatePasswordVC.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -269,9 +297,9 @@
 		C3A4834323AA0387009BAA7B /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				C372CDE923B5E8FC00F997EA /* CustomCell */,
 				C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */,
-				C3B6B7BA23ABD92F001BD4AB /* CustomCollectionViewLayout.swift */,
-				C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */,
+				C3210B9E23B36C0D00D89D09 /* AdvancedVC.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -527,25 +555,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */,
+				C3210B9F23B36C0D00D89D09 /* AdvancedVC.swift in Sources */,
 				C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */,
 				C34C5C43238E142600A54877 /* ManageStaff.xcdatamodeld in Sources */,
+				C372CDF323B5FAE400F997EA /* FilterTVC.swift in Sources */,
 				C34C5C3D238E142600A54877 /* ViewController.swift in Sources */,
 				C3B6B7BD23ABD968001BD4AB /* ContentCollectionViewCell.swift in Sources */,
 				C3E7BB04239B2DF800FBE44B /* ResetPasswordVC.swift in Sources */,
 				C30BBDEA23903468008C2956 /* ScanQRVC.swift in Sources */,
 				B23F71F423A34D920097C725 /* MainNavigationController.swift in Sources */,
+				C319651E23B8F05300668C5F /* UpdateEmailVC.swift in Sources */,
 				C3B6B7BB23ABD92F001BD4AB /* CustomCollectionViewLayout.swift in Sources */,
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
 				B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */,
 				B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */,
-				C3A0325E2395DB0A005FC134 /* EditAccountVC.swift in Sources */,
 				B2B15EBD23A75FC500C0D2C5 /* ScheduleNavigationVC.swift in Sources */,
 				B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */,
 				C3CA668B23AA96A1006BD50F /* SpreadsheetVC.swift in Sources */,
 				C3A0325C23959A32005FC134 /* Setting.swift in Sources */,
 				B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */,
+				C3064C9123B496D700CAA6C0 /* SortTVC.swift in Sources */,
+				C319652023B8F06700668C5F /* UpdatePasswordVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

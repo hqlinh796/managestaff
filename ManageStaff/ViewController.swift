@@ -12,33 +12,17 @@ import Firebase
 
 var userAccount = user()
 class ViewController: UIViewController {
-
+    
+    let child = SpinnerViewController()
+    var ref : DatabaseReference!
+    let user = Auth.auth().currentUser
     override func viewDidLoad() {
         super.viewDidLoad()
-        let user = Auth.auth().currentUser
         
-        var ref : DatabaseReference!
         ref = Database.database().reference()
-        
-        let child = SpinnerViewController()
         self.startLoading(child: child)
         //load user info
-        
-        ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            userAccount.email = value?["email"] as? String ?? ""
-            userAccount.name = value?["name"] as? String ?? ""
-            userAccount.phone = value?["phone"] as? String ?? ""
-            userAccount.role = value?["role"] as? String ?? ""
-            userAccount.uid = user!.uid
-            userAccount.image = value?["imgURL"] as? String ?? ""
-            self.load(url: URL(string: userAccount.image)!)
-            self.stopLoading(child: child)
-            // ...
-        }) { (error) in
-            print("Can't load user info")
-        }
+        loadUserToGlobalVar()
     }
     
     //-----FUNCTION-------
@@ -48,6 +32,29 @@ class ViewController: UIViewController {
                     imageAvatar = image
                 }
             }
+    }
+    
+    func loadUserToGlobalVar(){
+        ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            userAccount.email = value?["email"] as? String ?? ""
+            userAccount.firstname = value?["firstname"] as? String ?? ""
+            userAccount.phone = value?["phone"] as? String ?? ""
+            userAccount.role = value?["role"] as? String ?? ""
+            userAccount.sex = value?["sex"] as? String ?? ""
+            userAccount.uid = self.user!.uid
+            userAccount.lastname = value?["lastname"] as? String ?? ""
+            userAccount.image = value?["imgurl"] as? String ?? ""
+            userAccount.department = value?["department"] as? String ?? ""
+            userAccount.leaderid = value?["leaderid"] as? String ?? ""
+            userAccount.salary = value?["salary"] as? String ?? ""
+            self.load(url: URL(string: userAccount.image)!)
+            self.stopLoading(child: self.child)
+            
+        }) { (error) in
+            print("Can't load user info")
+        }
     }
     
     @IBAction func ShowCalendarVC(_ sender: Any) {
