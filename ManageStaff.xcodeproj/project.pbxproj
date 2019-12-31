@@ -30,6 +30,8 @@
 		C34C5C5E238E142800A54877 /* ManageStaffUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C5D238E142800A54877 /* ManageStaffUITests.swift */; };
 		C34C5C6C238E14B400A54877 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */; };
 		C372CDF323B5FAE400F997EA /* FilterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372CDF223B5FAE400F997EA /* FilterTVC.swift */; };
+		C37BE0CF23BB05CB000AD40C /* PopUpAtttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE0CE23BB05CB000AD40C /* PopUpAtttendanceVC.swift */; };
+		C37BE0D123BB0A3C000AD40C /* PopUpStaffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE0D023BB0A3C000AD40C /* PopUpStaffVC.swift */; };
 		C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635C238FE4E70017C0A9 /* SignUpVC.swift */; };
 		C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635E238FE5010017C0A9 /* SignInVC.swift */; };
 		C3976362239029B80017C0A9 /* CheckInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3976361239029B80017C0A9 /* CheckInVC.swift */; };
@@ -94,6 +96,8 @@
 		C34C5C5F238E142800A54877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C372CDF223B5FAE400F997EA /* FilterTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTVC.swift; sourceTree = "<group>"; };
+		C37BE0CE23BB05CB000AD40C /* PopUpAtttendanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAtttendanceVC.swift; sourceTree = "<group>"; };
+		C37BE0D023BB0A3C000AD40C /* PopUpStaffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpStaffVC.swift; sourceTree = "<group>"; };
 		C397635C238FE4E70017C0A9 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
 		C397635E238FE5010017C0A9 /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		C3976361239029B80017C0A9 /* CheckInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckInVC.swift; sourceTree = "<group>"; };
@@ -253,6 +257,15 @@
 			path = CustomCell;
 			sourceTree = "<group>";
 		};
+		C37BE0D223BB0A43000AD40C /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				C37BE0D023BB0A3C000AD40C /* PopUpStaffVC.swift */,
+				C37BE0CE23BB05CB000AD40C /* PopUpAtttendanceVC.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		C3976360238FEB000017C0A9 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +313,7 @@
 				C372CDE923B5E8FC00F997EA /* CustomCell */,
 				C3CA668A23AA96A1006BD50F /* SpreadsheetVC.swift */,
 				C3210B9E23B36C0D00D89D09 /* AdvancedVC.swift */,
+				C37BE0D223BB0A43000AD40C /* PopUp */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -570,6 +584,8 @@
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
 				B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */,
+				C37BE0D123BB0A3C000AD40C /* PopUpStaffVC.swift in Sources */,
+				C37BE0CF23BB05CB000AD40C /* PopUpAtttendanceVC.swift in Sources */,
 				B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */,
 				B2B15EBD23A75FC500C0D2C5 /* ScheduleNavigationVC.swift in Sources */,
 				B2395D78239CD8A900E7E71E /* ManagerVC.swift in Sources */,
@@ -766,7 +782,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/administrator/Documents/File XCode/BT/CK/ManageStaff/ManageStaff/NGrid.framework/Headers/NGrid.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -790,7 +806,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/administrator/Documents/File XCode/BT/CK/ManageStaff/ManageStaff/NGrid.framework/Headers/NGrid.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

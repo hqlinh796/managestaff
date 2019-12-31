@@ -19,32 +19,37 @@ import FirebaseDatabase
 class SpreadsheetVC: UIViewController, FilterAndSortDelegate{
     
     
-    
-    let contentCellIdentifier = "ContentCellIdentifier"
-    var listID = [String]()
-    var listName = [String]()
+    var listIDStaff = [String]()
+    var listNameStaff = [String]()
     var ref = DatabaseReference()
     var scrollView: UIScrollView!
     var sortBy = "firstname"
     var isDesc = false
     var filterBy = filter()
     var rowSort = 0
+    var staff = user()
+    let formatter = DateFormatter()
+    var shiftLeader: [String: String] = [:]
+    var isSearch = false
+    var attendanceIndexPath = [IndexPath]()
+    
+    @IBOutlet weak var labelTime: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
-
+    @IBOutlet weak var textfieldSearch: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "HH:mm:ss dd-MM-yyyy"
         scrollView = UIScrollView()
-        
-        
         ref = Database.database().reference()
         //load user id and name to listUsers
         getDate()
         loadUser { (listID, listName) in
-            self.listID = listID
-            self.listName = listName
+            self.listIDStaff = listID
+            print(self.listIDStaff)
+            self.listNameStaff = listName
             self.collectionView.dataSource = self
             self.collectionView.delegate = self
         }
@@ -56,103 +61,237 @@ class SpreadsheetVC: UIViewController, FilterAndSortDelegate{
     
     @IBAction func tapOnAdvanced(_ sender: Any) {
         let AdvancedVC = storyboard?.instantiateViewController(withIdentifier: "AdvancedID") as! AdvancedVC
-        
         AdvancedVC.rowSort = self.rowSort
         AdvancedVC.isDesc = self.isDesc
         AdvancedVC.filterBy = self.filterBy
         self.filterBy = filter()
-        
         AdvancedVC.delegate = self
         present(AdvancedVC, animated: true, completion: nil)
     }
     
-    func filterBy(filterBy: filter, sortBy: Int, isDesc: Bool) {
-        self.filterBy = filterBy
-        //print(self.filterBy.sex)
-        if sortBy == 0 {
-            self.sortBy = "firstname"
-        }else if sortBy == 1{
-            self.sortBy = "department"
-        }else{
-            self.sortBy = "role"
+    
+    @IBAction func tapOnSearch(_ sender: Any) {
+        //
+        if textfieldSearch.text!.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty{
+            isSearch = false
         }
-        self.rowSort = sortBy
-        self.isDesc = isDesc
-        
-        listID.removeAll()
-        listName.removeAll()
+        listIDStaff.removeAll()
+        listNameStaff.removeAll()
+        // attendanceIndexPath.removeAll()
         loadUser { (listID, listName) in
-            self.listID = listID
-            self.listName = listName
+            self.listNameStaff = listName
+            self.listIDStaff = listID
+            self.isSearch = true
             self.collectionView.reloadData()
         }
-        
-        
     }
     
     
-    
-    func loadUser(completion: @escaping (_ listID: [String], _ listName: [String])->()){
-        self.ref.child("users").queryOrdered(byChild: sortBy).observeSingleEvent(of: .value) { (Snapshot) in
-            if Snapshot.childrenCount>0{
-                var listID = [String]()
-                var listName = [String]()
-                for dataSnapshot in Snapshot.children.allObjects as! [DataSnapshot]{
-                    if let user = dataSnapshot.value as? [String: Any]{
-                        if self.isValidUser(user: user){
-                            let lastname = user["lastname"] as! String
-                            let firstname = user["firstname"] as! String
-                            let name = lastname + " " + firstname
-                            let id = dataSnapshot.key
-                            listID.append(id)
-                            listName.append(name)
-                        }
-                    }
+    @IBAction func tapOnExport(_ sender: Any) {
+        if listIDStaff.count == 0 {
+            let alert = UIAlertController(title: "Lỗi", message: "Không có nhân viên trong danh sách", preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alert.addAction(OKAction)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        
+        let fileName = "Report \(filterBy.month)-\(filterBy.year).csv"
+        let filePath = getDocumentsDirectory().appendingPathComponent(fileName)
+        var header = "Họ tên"
+        let numDay = getNumDayInMonth(month: filterBy.month, year: filterBy.year)
+        for i in 1...numDay {
+            header = header + "," + String(i)
+        }
+        
+        var contentOfCSV = header + "\n"
+        var section = 1
+        let myGroup = DispatchGroup()
+        loadReport(numDay: numDay, myGroup: myGroup)
+        myGroup.notify(queue: .main){
+            for name in self.listNameStaff {
+                contentOfCSV = contentOfCSV + name
+                for row in 1...numDay{
+                    let indexPathTemp = IndexPath.init(row: row, section: section)
+                    //var isExist = false
                     
+                        if self.attendanceIndexPath.contains(indexPathTemp) {
+                            contentOfCSV = contentOfCSV + ",X"
+                            //isExist = true
+                           
+                        
+                        }else{
+                        contentOfCSV =  contentOfCSV + ",\"\""
+                    }
                 }
-                
-                if self.isDesc {
-                    completion(listID.reversed(), listName.reversed())
-                }else{
-                    completion(listID, listName)
+                contentOfCSV = contentOfCSV + "\n"
+                section += 1
+            }
+            print(contentOfCSV)
+            do {
+                try contentOfCSV.write(to: filePath, atomically: true, encoding: String.Encoding.utf8)
+            } catch {
+                print("Failed to create file")
+                print("\(error)")
+            }
+            
+            let activity = UIActivityViewController(activityItems: [ filePath], applicationActivities: nil)
+            activity.popoverPresentationController?.barButtonItem = self.navigationItem.rightBarButtonItem
+            activity.popoverPresentationController?.sourceView = self.view
+            self.present(activity, animated: true)
+            
+        }
+        
+        
+        
+    
+}
+
+
+
+//Extension
+
+
+func filterBy(filterBy: filter, sortBy: Int, isDesc: Bool) {
+    self.filterBy = filterBy
+    //print(self.filterBy.sex)
+    if sortBy == 0 {
+        self.sortBy = "firstname"
+    }else if sortBy == 1{
+        self.sortBy = "department"
+    }else{
+        self.sortBy = "role"
+    }
+    self.rowSort = sortBy
+    self.isDesc = isDesc
+    labelTime.text = filterBy.month + "-" + filterBy.year
+    listIDStaff.removeAll()
+    listNameStaff.removeAll()
+    //attendanceIndexPath.removeAll()
+    loadUser { (listID, listName) in
+        self.listIDStaff = listID
+        self.listNameStaff = listName
+        self.collectionView.reloadData()
+    }
+    
+    
+}
+
+
+// Function helper
+
+    func loadReport(numDay: Int, myGroup: DispatchGroup){
+    attendanceIndexPath.removeAll()
+    for section in 1...listIDStaff.count{
+        for row in 1...numDay{
+            let day = row<10 ? "0" + String(row) : String(row)
+            let key = filterBy.year + filterBy.month + day + listIDStaff[section-1]
+            myGroup.enter()
+            ref.child("attendance").child(key).observeSingleEvent(of: .value) { (DataSnapshot) in
+                if !DataSnapshot.exists(){
+                    let indexPathTemp = IndexPath.init(row: row, section: section)
+                    self.attendanceIndexPath.append(indexPathTemp)
+                }
+                myGroup.leave()
+            }
+        }
+    }
+    
+}
+
+func loadUser(completion: @escaping (_ listIDStaff: [String], _ listNameStaff: [String])->()){
+    self.ref.child("users").queryOrdered(byChild: sortBy).observeSingleEvent(of: .value) { (Snapshot) in
+        if Snapshot.childrenCount>0{
+            var listID = [String]()
+            var listName = [String]()
+            for dataSnapshot in Snapshot.children.allObjects as! [DataSnapshot]{
+                if let user = dataSnapshot.value as? [String: Any]{
+                    let lastname = user["lastname"] as! String
+                    let firstname = user["firstname"] as! String
+                    let name = lastname + " " + firstname
+                    if self.isValidUser(user: user, name: name){
+                        let id = dataSnapshot.key
+                        listID.append(id)
+                        listName.append(name)
+                    }
                 }
                 
             }
-        }
-        
-    }
-   
-    func getDate(){
-        //get year and month
-        if filterBy.year.isEmpty {
-            //get current year and last month
-            let calendar = Calendar.current
-            let date = Date()
-            let currentYear = calendar.component(.year, from: date)
-            let currentMonth = calendar.component(.month, from: date)
-            filterBy.year = String(currentYear)
-            filterBy.month = String(currentMonth - 1)
-        }
-    }
-    
-    func isValidUser(user: [String: Any]) -> Bool{
-        //let userResult: [String: String]?
-        //var isExistUser = false
-        if filterBy.sex.count == 1 && user["sex"] as! String != filterBy.sex[0] {
-            return false
-        }
-        
-        if (filterBy.department.count > 0 && filterBy.department.count < 5 && filterBy.department.firstIndex(of: user["department"] as! String) == nil){
-           
-            return false
-        }
-        if (filterBy.role.count > 0 && filterBy.role.count < 4 && filterBy.role.firstIndex(of: user["role"]! as! String) == nil){
             
-            return false
+            if self.isDesc {
+                completion(listID.reversed(), listName.reversed())
+            }else{
+                completion(listID, listName)
+            }
+            
         }
-        return true
     }
     
+}
+
+func getNumDayInMonth(month: String, year: String) -> Int{
+    switch Int(month) {
+    case 4, 6, 9, 11:
+        return 30
+    case 2:
+        if Int(year)! % 4 == 0 {
+            return 29
+        }else{
+            return 28
+        }
+    default:
+        return 31
+    }
+}
+
+func getDate(){
+    //get year and month
+    if filterBy.year.isEmpty {
+        //get current year and last month
+        let calendar = Calendar.current
+        let date = Date()
+        let currentYear = calendar.component(.year, from: date)
+        let currentMonth = calendar.component(.month, from: date)
+        filterBy.year = String(currentYear)
+        filterBy.month = String(currentMonth - 1)
+        labelTime.text = filterBy.month + "-" + filterBy.year
+    }
+}
+
+func isValidUser(user: [String: Any], name: String) -> Bool{
+    //let userResult: [String: String]?
+    
+    if isSearch {
+        let keyword = textfieldSearch.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let regexText = "[a-z]*" + keyword + "[a-z]*"
+        let regex = try! NSRegularExpression(pattern: regexText, options: .caseInsensitive)
+        let range = NSRange(location: 0, length: name.utf16.count)
+        if (regex.firstMatch(in: name, options: [], range: range) == nil){
+            return false
+        }
+    }
+    
+    if filterBy.sex.count == 1 && user["sex"] as! String != filterBy.sex[0] {
+        return false
+    }
+    
+    if (filterBy.department.count > 0 && filterBy.department.count < 5 && filterBy.department.firstIndex(of: user["department"] as! String) == nil){
+        
+        return false
+    }
+    if (filterBy.role.count > 0 && filterBy.role.count < 4 && filterBy.role.firstIndex(of: user["role"]! as! String) == nil){
+        
+        return false
+    }
+    return true
+}
+
+func getDocumentsDirectory() -> URL {
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    return paths[0]
+}
+
 }
 
 
@@ -161,7 +300,7 @@ class SpreadsheetVC: UIViewController, FilterAndSortDelegate{
 extension SpreadsheetVC: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return listID.count + 1
+        return listIDStaff.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -173,19 +312,7 @@ extension SpreadsheetVC: UICollectionViewDataSource {
         // swiftlint:disable force_cast
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ContentCellIdentifier", for: indexPath) as! ContentCollectionViewCell
         
-        var numDayInMonth = 0
-        switch Int(filterBy.month) {
-        case 4, 6, 9, 11:
-            numDayInMonth = 30
-        case 2:
-            if Int(filterBy.year)! % 4 == 0 {
-                numDayInMonth = 29
-            }else{
-                numDayInMonth = 28
-            }
-        default:
-            numDayInMonth = 31
-        }
+        let numDayInMonth = getNumDayInMonth(month: filterBy.month, year: filterBy.year)
         
         if indexPath.section % 2 != 0 {
             cell.backgroundColor = UIColor(white: 242/255.0, alpha: 1.0)
@@ -206,7 +333,7 @@ extension SpreadsheetVC: UICollectionViewDataSource {
         } else {
             if indexPath.row == 0 {
                 //tên nhân viên
-                cell.contentLabel.text = listName[indexPath.section-1]
+                cell.contentLabel.text = listNameStaff[indexPath.section-1]
                 cell.contentLabel.textAlignment = .left
             }else if indexPath.row > numDayInMonth{
                 cell.contentLabel.text = ""
@@ -218,10 +345,11 @@ extension SpreadsheetVC: UICollectionViewDataSource {
                     day = "0" + day
                 }
                 var value = ""
-                let key = filterBy.year + filterBy.month + day + listID[indexPath.section-1]
+                let key = filterBy.year + filterBy.month + day + listIDStaff[indexPath.section - 1]
                 ref.child("attendance").child(key).observeSingleEvent(of: .value) { (DataSnapshot) in
                     if !DataSnapshot.exists(){
                         value = "X"
+                        //self.attendanceIndexPath.append(indexPath)
                     }
                     cell.contentLabel.text = value
                 }
@@ -234,17 +362,76 @@ extension SpreadsheetVC: UICollectionViewDataSource {
 
 // MARK: - UICollectionViewDelegate
 extension SpreadsheetVC: UICollectionViewDelegate {
- 
-    /*
- let myTimeInterval = TimeInterval(timestamp)
- let time = NSDate(timeIntervalSince1970: TimeInterval(myTimeInterval))
- let formatter = DateFormatter()
- 
- formatter.timeZone = TimeZone.current
- 
- formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
- 
- let dateString = formatter.string(from: time as Date)
- */
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section != 0 {
+            if indexPath.row == 0 {
+                //show info
+                // Get user value
+                let uid = listIDStaff[indexPath.section - 1]
+                ref.child("users").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+                    let value = snapshot.value as? NSDictionary
+                    self.staff.email = value?["email"] as? String ?? ""
+                    self.staff.firstname = value?["firstname"] as? String ?? ""
+                    self.staff.phone = value?["phone"] as? String ?? ""
+                    self.staff.role = value?["role"] as? String ?? ""
+                    self.staff.sex = value?["sex"] as? String ?? ""
+                    self.staff.lastname = value?["lastname"] as? String ?? ""
+                    self.staff.image = value?["imgurl"] as? String ?? ""
+                    self.staff.department = value?["department"] as? String ?? ""
+                    self.staff.uid = uid
+                    //show Popup view
+                    let popUpStaffVC = self.storyboard?.instantiateViewController(withIdentifier: "PopUpStaffID") as! PopUpStaffVC
+                    popUpStaffVC.staff = self.staff
+                    self.present(popUpStaffVC, animated: true, completion: nil)
+                }
+            }else{
+                //show time
+                let year = filterBy.year;
+                let month = filterBy.month.count == 1 ? "0" + filterBy.month : filterBy.month
+                let day = indexPath.row < 10 ? "0" + String(indexPath.row) : String(indexPath.row)
+                let uid = listIDStaff[indexPath.section - 1]
+                let key = year + month + day + uid
+                ref.child("attendance").child(key).observeSingleEvent(of: .value, with: { (snapshot) in
+                    if snapshot.exists(){
+                        let value = snapshot.value as! NSDictionary
+                        let name = self.listNameStaff[indexPath.section - 1]
+                        let time = value["time"] as! TimeInterval
+                        let date = NSDate(timeIntervalSince1970: time)
+                        let dateString = self.formatter.string(from: date as Date)
+                        let shiftleaderid = value["shiftleaderid"] as! String
+                        if let shiftLeaderName = self.shiftLeader[shiftleaderid] {
+                            let popUpAttendanceVC = self.storyboard?.instantiateViewController(withIdentifier: "PopUpAttendanceID") as! PopUpAtttendanceVC
+                            popUpAttendanceVC.name = name
+                            popUpAttendanceVC.time = dateString
+                            popUpAttendanceVC.shiftLeader = shiftLeaderName
+                            self.present(popUpAttendanceVC, animated: true, completion: nil)
+                            
+                        }else{
+                            //appende to dictionary shift leader
+                            self.ref.child("users").child(shiftleaderid).observeSingleEvent(of: .value, with: { (DataSnapshot) in
+                                if DataSnapshot.exists(){
+                                    let value2 = DataSnapshot.value as! NSDictionary
+                                    let firstname2 = value2["firstname"] as! String
+                                    let lastname2 = value2["lastname"] as! String
+                                    let shiftLeaderName = lastname2 + " " + firstname2
+                                    self.shiftLeader.updateValue(shiftLeaderName, forKey: shiftleaderid)
+                                    
+                                    let popUpAttendanceVC = self.storyboard?.instantiateViewController(withIdentifier: "PopUpAttendanceID") as! PopUpAtttendanceVC
+                                    popUpAttendanceVC.name = name
+                                    popUpAttendanceVC.time = dateString
+                                    popUpAttendanceVC.shiftLeader = shiftLeaderName
+                                    self.present(popUpAttendanceVC, animated: true, completion: nil)
+                                }
+                            })
+                        }
+                    }
+                    
+                }) { (error) in
+                    print("Can't load user info")
+                }
+            }
+        }
+    }
     
 }
