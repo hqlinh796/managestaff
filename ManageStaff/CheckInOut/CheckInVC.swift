@@ -23,6 +23,7 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         self.stopLoading(child: child)
     }
     
+    @IBOutlet weak var imageviewAvatar: UIImageView!
     @IBOutlet weak var labelNotif: UILabel!
     var ref : DatabaseReference!
     var currentYear : String?
@@ -40,7 +41,6 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         labelNotif.isHidden = true
         //get current Date
         getDate()
-        
         ref = Database.database().reference()
     }
     
@@ -86,11 +86,27 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         }
     }
     
+
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() {
+                self.imageviewAvatar.image = UIImage(data: data)
+            }
+        }
+    }
+    
     func findStaff(qrcode: String){
         ref.child("users").child(qrcode).observe(.value) { (DataSnapshot) in
             let value = DataSnapshot.value as? NSDictionary
             self.labelName.text = value?["name"] as? String
             self.labelPhone.text = value?["phone"] as? String
+            let url = URL(string: value?["imgurl"] as! String)
+            self.downloadImage(from: url!)
         }
     }
     

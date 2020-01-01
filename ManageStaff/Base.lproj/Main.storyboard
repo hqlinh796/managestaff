@@ -127,7 +127,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FGO-tK-ve2">
-                                                <rect key="frame" x="0.0" y="82" width="200" height="27"/>
+                                                <rect key="frame" x="0.0" y="82" width="200" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Fmu-Wz-gl8"/>
                                                     <constraint firstAttribute="width" constant="200" id="UJD-VJ-Z5o"/>
@@ -136,7 +136,7 @@
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NWb-1t-jqo">
-                                                <rect key="frame" x="0.0" y="120" width="200" height="30"/>
+                                                <rect key="frame" x="0.0" y="123" width="200" height="27"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="Erd-66-5b9"/>
                                                     <constraint firstAttribute="width" constant="200" id="zyq-T7-UgU"/>
@@ -292,13 +292,6 @@
                                     <action selector="tapOnSearch:" destination="fj2-5U-uBR" eventType="touchUpInside" id="8Rz-rP-VA6"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-rd-RnA">
-                                <rect key="frame" x="132" y="99" width="100" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5a4-jj-OwW">
                                 <rect key="frame" x="200" y="94" width="32" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -307,6 +300,13 @@
                                     <action selector="tapOnExport:" destination="fj2-5U-uBR" eventType="touchUpInside" id="qb3-kK-kSh"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-rd-RnA">
+                                <rect key="frame" x="92" y="95" width="100" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -1496,13 +1496,6 @@
                                                     <action selector="onChangingLastName:" destination="RUF-rI-8yf" eventType="editingChanged" id="cO6-Gy-F5s"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THp-zH-JT6">
-                                                <rect key="frame" x="147" y="424" width="163" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                            </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bp7-dT-7K5">
                                                 <rect key="frame" x="147" y="462" width="120" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1561,6 +1554,13 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="THp-zH-JT6">
+                                                <rect key="frame" x="147" y="429" width="163" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
@@ -1885,6 +1885,7 @@
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="dkf-aR-tBp"/>
                     <connections>
+                        <outlet property="imageviewAvatar" destination="hBp-Hr-xYS" id="lcY-nc-N9L"/>
                         <outlet property="labelName" destination="tf7-Xx-UgT" id="dsF-9S-SMI"/>
                         <outlet property="labelNotif" destination="9Nb-am-XEi" id="NDy-8V-sF3"/>
                         <outlet property="labelPhone" destination="e3v-jL-HnI" id="YBx-Rh-i0k"/>
