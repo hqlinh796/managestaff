@@ -15,13 +15,13 @@ class SignInVC: UIViewController {
    
     @IBOutlet weak var textfieldEmail: UITextField!
     @IBOutlet weak var textfieldPassword: UITextField!
-    @IBOutlet weak var labelError: UILabel!
+   
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
         //subview
-        labelError.isHidden = true
+        
         
         //tap Anywhere
         self.dismissKeyboard()
@@ -80,8 +80,7 @@ class SignInVC: UIViewController {
     }
     
     func showError(error: String){
-        labelError.text = error
-        labelError.isHidden = false
+        
     }
     
     

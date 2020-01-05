@@ -18,7 +18,7 @@ class SignUpVC: UIViewController {
     @IBOutlet weak var textfieldEmail: UITextField!
     @IBOutlet weak var textfieldPassword: UITextField!
     @IBOutlet weak var textfieldName: UITextField!
-    @IBOutlet weak var labelError: UILabel!
+   
     @IBOutlet weak var textfieldPhone: UITextField!
     @IBOutlet weak var imageviewAvatar: UIImageView!
     @IBOutlet weak var textfieldLastName: UITextField!
@@ -29,8 +29,8 @@ class SignUpVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        labelError.isHidden = true
         
+        setup()
         //tap on image
         
         //tap anywhere
@@ -100,8 +100,8 @@ class SignUpVC: UIViewController {
     //------FUNCTION HEPLER
     
     func showError(error: String){
-        labelError.text = error
-        labelError.isHidden = false
+       
+        
     }
     
     func validateInput() -> String{
@@ -164,7 +164,20 @@ class SignUpVC: UIViewController {
         present(mainNavigationVC, animated: true, completion: nil)
     }
     
+    func setup(){
+        settingForTextField(textfield: textfieldPhone, placeholder: "Điện thoại")
+        settingForTextField(textfield: textfieldName, placeholder: "Tên")
+        settingForTextField(textfield: textfieldEmail, placeholder: "Email")
+        settingForTextField(textfield: textfieldLastName, placeholder: "Họ và tên đệm")
+        settingForTextField(textfield: textfieldPassword, placeholder: "Mật khẩu")
+        
+    }
+    
+    func settingForTextField(textfield: UITextField, placeholder: String){
+        textfield.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        textfield.addBorder(toSide: .Bottom, withColor: UIColor.white.cgColor, andThickness: 0.7)
+    }
+    
 }
-
 
 

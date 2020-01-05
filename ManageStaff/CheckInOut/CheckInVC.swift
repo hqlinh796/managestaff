@@ -12,36 +12,51 @@ import Firebase
 class CheckInVC: UIViewController, scanQRCodeDelegate {
     func sendQRCode(qrcode: String) {
         if qrcode.isEmpty{
-            showNotif(notif: "Can't scan QR Code")
+            showNotif(title: "Lỗi", mes: "Không thể nhận dạng QR CODE")
             return
         }
         textfiledQRCode.text = qrcode
         //find staff
         let child = SpinnerViewController()
         self.startLoading(child: child)
-        findStaff(qrcode: qrcode)
+        getStaff(qrcode: qrcode)
         self.stopLoading(child: child)
+        showNotif(title: "Thành công", mes: "Đã thêm \(labelName)")
     }
     
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelLeaderShift: UILabel!
     @IBOutlet weak var imageviewAvatar: UIImageView!
-    @IBOutlet weak var labelNotif: UILabel!
-    var ref : DatabaseReference!
-    var currentYear : String?
-    var currentMonth: String?
-    var currentDay: String?
    
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelPhone: UILabel!
     @IBOutlet weak var textfiledQRCode: UITextField!
+    @IBOutlet weak var labelSex: UILabel!
+    @IBOutlet weak var labelDepartment: UILabel!
+    @IBOutlet weak var labelRole: UILabel!
+    @IBOutlet weak var labelTime: UILabel!
+    @IBOutlet weak var stackInfo: UIStackView!
+    @IBOutlet weak var viewContent: UIView!
+    @IBOutlet weak var buttonScan: UIButton!
+    @IBOutlet weak var viewShiftLeader: UIView!
+    @IBOutlet weak var imageShiftLeader: UIImageView!
     
+    
+    
+    var ref : DatabaseReference!
+    var currentYear : String?
+    var currentMonth: String?
+    var currentDay: String?
+    let formatter = DateFormatter()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        labelNotif.isHidden = true
-        //get current Date
         getDate()
+        setup()
+        
         ref = Database.database().reference()
+       
     }
     
     @IBAction func tapOnSave(_ sender: Any) {
@@ -56,10 +71,10 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         "time": NSDate().timeIntervalSince1970,
         "shiftleaderid": userAccount.uid
     ])
-        labelNotif.isHidden = false
+        
     }
     @IBAction func tapOnScan(_ sender: Any) {
-        labelNotif.isHidden = true
+        
       
         let ScanQRVC = storyboard?.instantiateViewController(withIdentifier: "ScanQRID") as! ScanQRVC
         ScanQRVC.delegate = self
@@ -91,28 +106,40 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func downloadImage(from url: URL) {
+    func downloadImage(from url: URL, imageView: UIImageView) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async() {
-                self.imageviewAvatar.image = UIImage(data: data)
+                imageView.image = UIImage(data: data)
             }
         }
     }
     
-    func findStaff(qrcode: String){
+    func getStaff(qrcode: String){
         ref.child("users").child(qrcode).observe(.value) { (DataSnapshot) in
             let value = DataSnapshot.value as? NSDictionary
-            self.labelName.text = value?["name"] as? String
+            
+            let lastname = value?["lastname"] as? String
+            let firstname = value?["firstname"] as? String
+            self.labelName.text = lastname! + " " + firstname!
             self.labelPhone.text = value?["phone"] as? String
             let url = URL(string: value?["imgurl"] as! String)
-            self.downloadImage(from: url!)
+            self.downloadImage(from: url!, imageView: self.imageviewAvatar)
+            self.labelSex.text = value?["sex"] as? String
+            self.labelDepartment.text = value?["department"] as? String
+            self.labelRole.text = value?["role"] as? String
+            let time = value?["time"] as! TimeInterval
+            let date = NSDate(timeIntervalSince1970: time)
+            let dateString = self.formatter.string(from: date as Date)
+            self.labelTime.text = dateString
         }
     }
     
-    func showNotif(notif: String){
-        labelNotif.text = notif
-        labelNotif.isHidden = false
+    func showNotif(title: String, mes: String){
+        let alert = UIAlertController(title: title, message: mes, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(OKAction)
+        present(alert, animated: true, completion: nil)
     }
     func startLoading(child: SpinnerViewController){
         addChild(child)
@@ -127,5 +154,41 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         child.view.removeFromSuperview()
         child.removeFromParent()
     }
-
+    
+    func setup(){
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = "HH:mm:ss dd-MM-yyyy"
+        //labelNotif.isHidden = true
+        
+        imageviewAvatar.layer.cornerRadius = imageviewAvatar.frame.width/2
+        imageviewAvatar.clipsToBounds = true
+        imageviewAvatar.layer.borderWidth = 2
+        imageviewAvatar.layer.borderColor = UIColor(red: 36/255, green: 74/255, blue: 145/255, alpha: 1).cgColor
+        labelTitle.text = "Điểm danh \(currentDay!)/\(currentMonth!)/\(currentYear!)"
+        labelLeaderShift.text = "Trưởng ca: " + userAccount.lastname + " " + userAccount.firstname
+        
+        let constant = self.view.frame.width/4
+        let leftEdgeOfStackInfo = NSLayoutConstraint(item: stackInfo, attribute: NSLayoutConstraint.Attribute.leading, relatedBy: NSLayoutConstraint.Relation.equal, toItem: viewContent, attribute: NSLayoutConstraint.Attribute.leading, multiplier: 1, constant: constant)
+        viewContent.addConstraint(leftEdgeOfStackInfo)
+        buttonScan.layer.cornerRadius = 0
+        
+        //set up for image
+        let url = URL(string: userAccount.image)!
+        imageShiftLeader.image = imageAvatar
+        imageShiftLeader.layer.cornerRadius = imageShiftLeader.frame.width/2
+        imageShiftLeader.clipsToBounds = true
+        imageShiftLeader.layer.borderColor = UIColor.white.cgColor
+        imageShiftLeader.layer.borderWidth = 2
+        
+        //set up for view shiftleader
+        viewShiftLeader.layer.cornerRadius = viewShiftLeader.frame.height / 2
+        viewShiftLeader.clipsToBounds = true
+        viewShiftLeader.layer.borderColor = UIColor.white.cgColor
+        viewShiftLeader.layer.borderWidth = 4
+        
+    }
+    
 }
+
+
+

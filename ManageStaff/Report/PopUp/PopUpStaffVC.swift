@@ -30,6 +30,12 @@ class PopUpStaffVC: UIViewController {
         labelPhone.text = staff.phone
         labelDepartment.text = staff.department
         labelUid.text = staff.uid
+        
+        imageviewAvatar.layer.cornerRadius = imageviewAvatar.frame.width/2
+        imageviewAvatar.clipsToBounds = true
+        imageviewAvatar.layer.borderWidth = 2
+        imageviewAvatar.backgroundColor = .white
+        
         let url = URL(string: staff.image)
         downloadImage(from: url!)
         

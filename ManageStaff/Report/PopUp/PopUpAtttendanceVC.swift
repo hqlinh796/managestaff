@@ -22,8 +22,8 @@ class PopUpAtttendanceVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         labelName.text = name
-        labelTime.text = time
-        labelShiftLeader.text = shiftLeader
+        labelTime.text = "Thời gian: " + time
+        labelShiftLeader.text = "Người trực: " + shiftLeader
         // Do any additional setup after loading the view.
     }
     

@@ -45,14 +45,15 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     let arrayTime = [["Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"], ["2019", "2020", "2021"]]
     
     var rowSort = 0
-    
-   
+    var lastHeight: CGFloat = 210.0
+    var heightOfTableFilter: NSLayoutConstraint = NSLayoutConstraint()
     override func viewDidLoad() {
         super.viewDidLoad()
         
         loadFilterAndSort()
         setupDatePicker()
-        
+        heightOfTableFilter = NSLayoutConstraint(item: tableFilter, attribute: NSLayoutConstraint.Attribute.height, relatedBy: NSLayoutConstraint.Relation.equal, toItem: nil, attribute: NSLayoutConstraint.Attribute.notAnAttribute, multiplier: 1, constant: lastHeight)
+        tableFilter.addConstraint(heightOfTableFilter)
     }
     
     
@@ -98,22 +99,30 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         if tableView == tableSort{
             let cell = tableView.dequeueReusableCell(withIdentifier: "sortCell") as! SortTVC
             cell.labelTitle.text = arraySort[indexPath.row]
+            let imageView = UIImageView(frame: CGRect(x: tableView.frame.size.width - 50, y: 15, width: 20, height: 20))
             if indexPathSort == indexPath {
-                cell.backgroundColor = .gray
+                
+                imageView.image = UIImage(named: "tick")
+                
             }else{
-                cell.backgroundColor = .white
+                imageView.image = UIImage(named: "noneImage")
             }
+            cell.addSubview(imageView)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as! FilterTVC
             cell.labelTitle.text = arrayFilter[indexPath.section][indexPath.row]
+            let imageView = UIImageView(frame: CGRect(x: tableView.frame.size.width - 50, y: 15, width: 20, height: 20))
             for i in arrayIndexPathFilter {
                 if i == indexPath{
-                    cell.backgroundColor = .gray
+                    imageView.image = UIImage(named: "tick")
+                    cell.addSubview(imageView)
                     return cell
                 }
             }
-            cell.backgroundColor = .white
+            
+            imageView.image = UIImage(named: "noneImage")
+            cell.addSubview(imageView)
             return cell
         }
         
@@ -127,32 +136,67 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == tableSort{
-            return 30
+            return 50
         }
+        
         for section in selectSection{
             if section == indexPath.section{
-                return 30
+                return 50
             }
         }
         return 0
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == tableSort {
+            return 50
+        }
+        return 70
+    }
+    
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 50))
-        view.backgroundColor = UIColor(red: 232.0, green: 232.0, blue: 232.0, alpha: 1)
-        let title = UILabel(frame: CGRect(x: 10, y: 5, width: tableView.frame.size.width, height: 18))
+        
+        
+        //filter
         if tableView == tableFilter{
+            let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 70))
+            
+            let title = UILabel(frame: CGRect(x: 30, y: 25, width: tableView.frame.size.width, height: 20))
+            title.textColor = UIColor(red: 36/255, green: 74/255, blue: 145/255, alpha: 1)
+            title.font = UIFont.systemFont(ofSize: 20)
             title.text = arrayHeaderFilter[section]
             let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(showRow(sender:)))
             tapRecognizer.name = String(section)
             tapRecognizer.numberOfTapsRequired = 1
             tapRecognizer.numberOfTouchesRequired = 1
+            
+            let imageView = UIImageView(frame: CGRect(x: tableView.frame.size.width - 50, y: 25, width: 20, height: 20))
+            if selectSection.contains(section){
+                imageView.image = UIImage(named: "down section")
+            }else{
+                imageView.image = UIImage(named: "right section")
+            }
             view.addGestureRecognizer(tapRecognizer)
+            view.addSubview(title)
+            view.bringSubviewToFront(title)
+            view.addSubview(imageView)
+            view.bringSubviewToFront(imageView)
+            let color = UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1)
+            view.layer.borderColor = color.cgColor
+            view.layer.borderWidth = 2
+            return view
         }
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 25))
+        view.backgroundColor = .init(UIColor(red: 239/255, green: 239/255, blue: 244/255, alpha: 1))
+        let title = UILabel(frame: CGRect(x: 30, y: 5, width: tableView.frame.size.width, height: 20))
+        title.text = "Sắp xếp"
+        title.textColor = UIColor(red: 27/255, green: 57/255, blue: 117/255, alpha: 1)
+        title.font = UIFont.boldSystemFont(ofSize: 22)
         view.addSubview(title)
-        view.bringSubviewToFront(title)
         
         return view
+        
     }
     
    
@@ -196,9 +240,7 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     //-------FUNCTION HELPER
     
-    func getTime(){
-        
-    }
+    
     
     func getFilterBy(){
         resetFilterBy()
@@ -217,8 +259,12 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         let section = Int(sender.name!)!
         if let index = selectSection.firstIndex(of: section){
             selectSection.remove(at: index)
+            heightOfTableFilter.constant = lastHeight - CGFloat(50 * arrayFilter[section].count)
+            lastHeight = lastHeight - CGFloat(50 * arrayFilter[section].count)
         }else{
             selectSection.append(section)
+            heightOfTableFilter.constant = lastHeight + CGFloat(50 * arrayFilter[section].count)
+            lastHeight = lastHeight + CGFloat(50 * arrayFilter[section].count)
         }
         tableFilter.reloadSections([section], with: .none)
     }
@@ -227,6 +273,9 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         datePicker.dataSource = self
         datePicker.delegate = self
        
+        textfieldTime.setLeftPaddingPoints(30)
+        textfieldTime.setRightPaddingPoints(30)
+        
         //ToolBar
         let toolbar = UIToolbar();
         toolbar.sizeToFit()
@@ -302,4 +351,18 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
         filterBy.role.removeAll()
     }
     
+}
+
+
+extension UITextField {
+    func setLeftPaddingPoints(_ amount:CGFloat){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+    }
+    func setRightPaddingPoints(_ amount:CGFloat) {
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: amount, height: self.frame.size.height))
+        self.rightView = paddingView
+        self.rightViewMode = .always
+    }
 }

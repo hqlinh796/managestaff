@@ -6,6 +6,9 @@
 //  Copyright © 2019 linh. All rights reserved.
 //
 
+//string to QR Code https://medium.com/@dominicfholmes/generating-qr-codes-in-swift-4-b5dacc75727c
+
+
 import UIKit
 import Firebase
 import FirebaseAuth
@@ -17,7 +20,6 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     
     let pickerviewSex = UIPickerView()
     @IBOutlet weak var textfieldFirstName: UITextField!
-    @IBOutlet weak var textfieldLastName: UITextField!
     @IBOutlet weak var textfieldPhone: UITextField!
     @IBOutlet weak var labelRole: UILabel!
     @IBOutlet weak var labelDepartment: UILabel!
@@ -26,18 +28,19 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     @IBOutlet weak var imageviewAvatar: UIImageView!
     @IBOutlet weak var labelFullName: UILabel!
     @IBOutlet weak var labelEmail: UILabel!
-    @IBOutlet weak var labelError: UILabel!
+    @IBOutlet weak var buttonSignOut: UIButton!
     
     var imagePicker = UIImagePickerController()
     
     let arraySex = ["Nam", "Nữ"]
-    
+    var firstName = ""
+    var lastName = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         showUserInfo()
         setupForImageView()
         setupForPicker()
-        labelError.isHidden = true
+        setup()
     }
     
     
@@ -79,10 +82,29 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     }
     
     @IBAction func tapOnSave(_ sender: Any) {
-        labelError.isHidden = true
+        
         //validate input
+        if textfieldFirstName.text!.trimmingCharacters(in: .whitespacesAndNewlines).firstIndex(of: " ") == nil {
+            //show alert error
+            showAlert(title: "Lỗi", mes: "Vui lòng nhập tên đầy đủ")
+            return
+        }
+        
+        if let numbersRange = textfieldFirstName.text!.rangeOfCharacter(from: .decimalDigits) {
+            showAlert(title: "Lỗi", mes: "Tên không đúng định dạng")
+            return
+        }
+        
+        
         
         //
+        var fullName = textfieldFirstName.text?.trimmingCharacters(in: .whitespacesAndNewlines).components(separatedBy: " ")
+        firstName = fullName![fullName!.count - 1]
+        lastName = ""
+        for word in 0..<fullName!.count - 1{
+            lastName = lastName + " " + fullName![word]
+        }
+        lastName = lastName.trimmingCharacters(in: .whitespacesAndNewlines)
         //store image to cloud
         let child = SpinnerViewController()
         self.startLoading(child: child)
@@ -90,20 +112,21 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
             let ref : DatabaseReference!
             ref = Database.database().reference()
             ref.child("users").child(userAccount.uid).updateChildValues([
-                "firstname": self.textfieldFirstName.text!,
-                "lastname": self.textfieldLastName.text!,
+                "firstname": self.firstName,
+                "lastname": self.lastName,
                 "sex": self.textfieldSex.text!,
                 "phone": self.textfieldPhone.text!,
                 "imgurl": urlImage
                 ], withCompletionBlock: { (error, DatabaseReference) in
                     if error != nil {
-                        self.showError(err: "Không thể lưu chỉnh sửa, hãy thử lại")
+                        self.showAlert(title: "Lỗi", mes: "Không thể lưu chỉnh sửa, hãy thử lại")
                         return
                     }
             })
             self.stopLoading(child: child)
+            self.updateUserAccountGlobal()
             //notify success
-            
+            self.showAlert(title: "Thành công", mes: "Cập nhật tài khoản thành công")
         })
     }
     
@@ -114,16 +137,13 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     
     
     @IBAction func onChangingFirstName(_ sender: Any) {
-        let lastName = textfieldLastName?.text ?? ""
-        let firstName = textfieldFirstName?.text ?? ""
-        labelFullName.text = lastName + " " + firstName
+        //let lastName = textfieldLastName?.text ?? ""
+        labelFullName.text = textfieldFirstName.text!
     }
     
     
-    @IBAction func onChangingLastName(_ sender: Any) {
-        let lastName = textfieldLastName?.text ?? ""
-        let firstName = textfieldFirstName?.text ?? ""
-        labelFullName.text = lastName + " " + firstName
+    @IBAction func tapOnCamera(_ sender: Any) {
+        chooseImage()
     }
     
     
@@ -164,13 +184,14 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     
     func showUserInfo(){
        // self.labelEmail.text = userAccount.email
-        self.textfieldLastName.text = userAccount.lastname
-        self.textfieldFirstName.text = userAccount.firstname
+        lastName = userAccount.lastname
+        firstName = userAccount.firstname
+        self.textfieldFirstName.text = lastName + " " + firstName
         self.textfieldPhone.text = userAccount.phone
         self.labelRole.text = userAccount.role
         self.labelDepartment.text = userAccount.department
         self.textfieldSex.text = userAccount.sex
-        self.labelFullName.text = userAccount.lastname + " " + userAccount.firstname
+        self.labelFullName.text = self.textfieldFirstName.text!
         let index = userAccount.email.indexDistance(of: "@")
         let startIndex = String.Index(encodedOffset: index!-4)
         let endIndex = String.Index(encodedOffset: index!+3)
@@ -183,7 +204,9 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         guard let qrFilter = CIFilter(name: "CIQRCodeGenerator") else { return }
         qrFilter.setValue(data2, forKey: "inputMessage")
         guard let qrImage = qrFilter.outputImage else { return }
-        self.imageviewQRCode.image = UIImage(ciImage: qrImage)
+        let transform = CGAffineTransform(scaleX: 10, y: 10)
+        let scaledQrImage = qrImage.transformed(by: transform)
+        self.imageviewQRCode.image = UIImage(ciImage: scaledQrImage)
         
         //load image avatr
         //imageviewAvatar.load(url: URL(string: userAccount.image)!)
@@ -194,6 +217,9 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         let tapOnImage = UITapGestureRecognizer(target: self, action: #selector(chooseImage))
         imageviewAvatar.isUserInteractionEnabled = true;
         imageviewAvatar.addGestureRecognizer(tapOnImage)
+        imageviewAvatar.layer.cornerRadius = imageviewAvatar.frame.width/2
+        imageviewAvatar.layer.borderColor = UIColor.white.cgColor
+        imageviewAvatar.layer.borderWidth = 2
     }
     
     @objc func chooseImage(){
@@ -203,6 +229,12 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
             imagePicker.allowsEditing = false
             present(imagePicker, animated: true, completion: nil)
         }
+    }
+    
+    func setup(){
+        self.dismissKeyboard()
+        buttonSignOut.layer.cornerRadius = 0
+        
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -230,10 +262,11 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     }
     
     
-    func showError(err: String){
-        //show err
-        labelError.text = err
-        labelError.isHidden = false
+    func showAlert(title: String, mes: String){
+        let alert = UIAlertController(title: title, message: mes, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(OKAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func startLoading(child: SpinnerViewController){
@@ -248,6 +281,13 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         child.willMove(toParent: nil)
         child.view.removeFromSuperview()
         child.removeFromParent()
+    }
+    
+    func updateUserAccountGlobal(){
+        userAccount.firstname = firstName
+        userAccount.lastname = lastName
+        userAccount.sex = textfieldSex.text!
+        userAccount.phone = textfieldPhone.text!
     }
     
     
@@ -272,5 +312,31 @@ extension StringProtocol {
     func indexDistance<S: StringProtocol>(of string: S) -> Int? {
         guard let index = range(of: string)?.lowerBound else { return nil }
         return distance(from: startIndex, to: index)
+    }
+}
+
+
+//add border one edge https://stackoverflow.com/questions/17355280/how-to-add-a-border-just-on-the-top-side-of-a-uiview
+extension UIView {
+    
+    // Example use: myView.addBorder(toSide: .Left, withColor: UIColor.redColor().CGColor, andThickness: 1.0)
+    
+    enum ViewSide {
+        case Left, Right, Top, Bottom
+    }
+    
+    func addBorder(toSide side: ViewSide, withColor color: CGColor, andThickness thickness: CGFloat) {
+        
+        let border = CALayer()
+        border.backgroundColor = color
+        
+        switch side {
+        case .Left: border.frame = CGRect(x: frame.minX, y: frame.minY, width: thickness, height: frame.height); break
+        case .Right: border.frame = CGRect(x: frame.maxX, y: frame.minY, width: thickness, height: frame.height); break
+        case .Top: border.frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: thickness); break
+        case .Bottom: border.frame = CGRect(x: 0, y: frame.height, width: frame.width, height: thickness); break
+        }
+        
+        layer.addSublayer(border)
     }
 }
