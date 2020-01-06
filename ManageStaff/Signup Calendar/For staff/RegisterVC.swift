@@ -21,20 +21,43 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
     
     
     @IBAction func saveTapped(_ sender: Any) {
-        print(selectedDay)
+        
+//        var reg = 0
+//
+//            ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child("\(day)").observeSingleEvent(of: .value, with: { (snapshot) in
+//                let data = snapshot.value as! NSDictionary
+//                reg = data["registered"] as! Int
+//            })
+//
+//            ref.updateChildValues(["/schedule/\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))/\(day)/registered": reg + 1])
+//
+        for day in selectedDay {
+            dispatchGroup.enter()
+            ref.child("staffSchedule").child(Auth.auth().currentUser!.uid).child("\(Calendar.current.component(.month, from: self.date))-\(Calendar.current.component(.year, from: self.date))").child("\(day)").setValue([
+                "task": "abc"
+            ])
+            dispatchGroup.leave()
+        }
+        
+        dispatchGroup.notify(queue: .main){
+            self.dismiss(animated: true)
+        }
     }
     
     @IBOutlet weak var label: UILabel!
     @IBOutlet weak var calendar: FSCalendar!
     var blockedDay: [Int] = []
+    var fulledDay: [String] = []
     var date = Date()
     var selectedDay: [Int] = []
-    
+    var ref: DatabaseReference!
+    var dispatchGroup = DispatchGroup()
+
     
     
     //MARK: View
     override func viewDidLoad() {
-        
+        ref = Database.database().reference()
         calendar.allowsMultipleSelection = true
         calendar.setCurrentPage(date, animated: true)
         let formatter = DateFormatter()
@@ -44,7 +67,31 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
         label.text = "Register your working days for: \(month)-\(year)"
     }
     
-    
+    func checkFull(){
+
+        for i in 1...maxDayOfMonth(month: Calendar.current.component(.month, from: date), year: Calendar.current.component(.year, from: date)){
+            dispatchGroup.enter()
+
+            if blockedDay.firstIndex(of: i) == nil{
+                self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child(String(i)).observeSingleEvent(of: .value, with: { (snapshot) in
+                    let data = snapshot.value as! NSDictionary
+                    let max = data["maxStaff"] as! Int
+                    let reg = data["registered"] as! Int
+                    
+                    if (max == reg){
+//                        self.fulledDay.append(i)
+                    }
+                })
+            }
+            
+            dispatchGroup.leave()
+
+        }
+        
+        dispatchGroup.notify(queue: .main){
+             print(self.fulledDay)
+         }
+    }
     
     
     //MARK: process blocked days
@@ -53,14 +100,16 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
         if blockedDay.firstIndex(of: Calendar.current.component(.day, from: date)) != nil{
             return false
         }
-    
+        
         return true
     }
     
     //fill blocked days's color
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, fillDefaultColorFor date: Date) -> UIColor? {
         if blockedDay.firstIndex(of: Calendar.current.component(.day, from: date)) != nil{
-            return .gray
+            if Calendar.current.component(.month, from: date) == Calendar.current.component(.month, from: self.date){
+                return .gray
+            }
         }
         
         return .white
@@ -69,7 +118,9 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
     //hide title for blocked days
     func calendar(_ calendar: FSCalendar, titleFor date: Date) -> String? {
         if blockedDay.firstIndex(of: Calendar.current.component(.day, from: date)) != nil {
-            return ""
+            if Calendar.current.component(.month, from: date) == Calendar.current.component(.month, from: self.date){
+                return ""
+            }
         }
         
         return nil
@@ -82,7 +133,9 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
     //MARK: handle day seleting
     //when a day is being tapped (select), append to list of selected days
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        selectedDay.append(Calendar.current.component(.day, from: date))
+        if selectedDay.firstIndex(of: Calendar.current.component(.day, from: date)) == nil {
+            selectedDay.append(Calendar.current.component(.day, from: date))
+        }
     }
     
     //when a day is being re-tapped (deselect), remove that day from list of selected days

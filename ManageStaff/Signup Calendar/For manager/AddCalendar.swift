@@ -15,6 +15,7 @@ protocol AddCalendarDelegate {
     func AddCalendar(month: Int, year: Int)
 }
 
+
 class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     
     
@@ -25,6 +26,7 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     var date = Date()
     var blockedDay: [Int] = []
     var delegate:AddCalendarDelegate?
+    var ref: DatabaseReference!
     @IBAction func BackButtonTapped(_ sender: Any) {
         self.dismiss(animated: true)
     }
@@ -34,6 +36,7 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     
     //MARK: View
     override func viewDidLoad() {
+        ref = Database.database().reference()
         calendar.allowsMultipleSelection = true
         calendar.setCurrentPage(Date(), animated: true)
         let formatter = DateFormatter()
@@ -50,8 +53,25 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
     //MARK: handle save button
     @IBAction func SaveTapped(_ sender: Any) {
         date = calendar.currentPage
-        let db = Firestore.firestore()
-        db.collection("calendar").document("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").setData(["blocked day": blockedDay])
+        
+        self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").setValue([
+            "blocked day": blockedDay
+        ])
+        
+        for i in 1...maxDayOfMonth(month: Calendar.current.component(.month, from: date), year: Calendar.current.component(.year, from: date)){
+            
+            if blockedDay.firstIndex(of: i) == nil{
+                self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child(String(i)).setValue([
+                    "registered": 0,
+                    "maxStaff": 5,
+                    "task": 5
+                ])
+            } else {
+                self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child(String(i)).removeValue()
+            }
+        }
+        
+        
         delegate?.AddCalendar(month: (Calendar.current.component(.month, from: date)), year: (Calendar.current.component(.year, from: date)))
     }
     

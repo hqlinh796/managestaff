@@ -58,7 +58,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func ShowCalendarVC(_ sender: Any) {
-        if userAccount.role == "0"{
+        if userAccount.role == "Nhân viên"{
             let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "StaffID") as! StaffVC
             self.present(ScheduleVC, animated: true, completion: nil)
         }
