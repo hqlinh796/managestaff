@@ -33,7 +33,10 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
     
     
     //MARK: View
-    override func viewDidLoad() {
+    override func viewDidAppear(_ animated: Bool) {
+
+        list = []
+        blockedDay = []
         ref = Database.database().reference()
         
         dispatchGroup.enter()
@@ -43,8 +46,10 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
         ref.child("schedule").observeSingleEvent(of: .value, with: { (snapshot) in
             let value = snapshot.value as? NSDictionary
             
-            for name in value!.allKeys {
-                self.list.append(name as! String)
+            if value != nil {
+                for name in value!.allKeys {
+                    self.list.append(name as! String)
+                }
             }
             
             self.dispatchGroup.leave()
@@ -107,8 +112,11 @@ class ManagerVC: UIViewController, UITableViewDelegate, UITableViewDataSource, A
         startLoading(child: child)
         
         self.ref.child("schedule").child(list[indexPath.row]).observeSingleEvent(of: .value, with: { (snapshot) in
-            let data = snapshot.value as! NSDictionary
-            self.blockedDay = data["blocked day"] as! [Int]
+            let data = snapshot.value as? NSDictionary
+            
+            if data != nil {
+                self.blockedDay = data!["blocked day"] as! [Int]
+            }
             self.dispatchGroup.leave()
         })
         

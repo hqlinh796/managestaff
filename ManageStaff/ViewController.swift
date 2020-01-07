@@ -60,6 +60,7 @@ class ViewController: UIViewController {
     @IBAction func ShowCalendarVC(_ sender: Any) {
         if userAccount.role == "Nhân viên"{
             let ScheduleVC = self.storyboard?.instantiateViewController(withIdentifier: "StaffID") as! StaffVC
+            ScheduleVC.modalPresentationStyle = .fullScreen
             self.present(ScheduleVC, animated: true, completion: nil)
         }
         else {

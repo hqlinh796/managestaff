@@ -153,16 +153,7 @@ class SignUpVC: UIViewController {
     }
     
     
-    func navigateToMainNavigationView(){
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else{
-            return
-        }
-        
-        mainNavigationVC.modalPresentationStyle = .fullScreen
-        
-        present(mainNavigationVC, animated: true, completion: nil)
-    }
+    
     
     func setup(){
         settingForTextField(textfield: textfieldPhone, placeholder: "Điện thoại")

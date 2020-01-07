@@ -58,19 +58,6 @@ class AddCalendarVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource{
             "blocked day": blockedDay
         ])
         
-        for i in 1...maxDayOfMonth(month: Calendar.current.component(.month, from: date), year: Calendar.current.component(.year, from: date)){
-            
-            if blockedDay.firstIndex(of: i) == nil{
-                self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child(String(i)).setValue([
-                    "registered": 0,
-                    "maxStaff": 5,
-                    "task": 5
-                ])
-            } else {
-                self.ref.child("schedule").child("\(Calendar.current.component(.month, from: date))-\(Calendar.current.component(.year, from: date))").child(String(i)).removeValue()
-            }
-        }
-        
         
         delegate?.AddCalendar(month: (Calendar.current.component(.month, from: date)), year: (Calendar.current.component(.year, from: date)))
     }

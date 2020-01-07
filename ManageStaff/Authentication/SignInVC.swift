@@ -49,7 +49,7 @@ class SignInVC: UIViewController {
             }else{
                 //transition to home screen
                 let HomeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
-                //self.navigateToMainNavigationView()
+                HomeVC.modalPresentationStyle = .fullScreen
                 self.present(HomeVC, animated: true, completion: nil)
             }
         }
@@ -60,36 +60,35 @@ class SignInVC: UIViewController {
     
     func validateInput() -> String{
         if ((textfieldEmail.text?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)! || textfieldPassword.text!.isEmpty){
-            return "Please fill all fields!"
+            return "Hãy điền đủ thông tin"
         }
         
         //check email has @
         if !textfieldEmail.text!.contains("@"){
-            return "Email is incorrect!"
+            return "Email không hợp lệ"
         }
         
         //check password
         if !isValidPassword(password: textfieldPassword.text!){
-            return """
-            Password must contain: 1 number, 1 lower character,
-            1 uppper character and must has at least 8 characters
-            """
+            return "Mật khẩu phải chứa ít nhất: 1 số, 1 chữ thường 1 chữ in hoa và độ dài ít nhất 8 kí tự"
         }
         
         return ""
     }
     
     func showError(error: String){
-        
+        let alert = UIAlertController(title: "Lỗi", message: error, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: false, completion: nil)
     }
     
     
     override func viewDidAppear(_ animated: Bool){
         super.viewDidAppear(animated)
         if Auth.auth().currentUser != nil {
-            //navigateToMainNavigationView()
             let HomeVC = storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
-            //self.navigateToMainNavigationView()
+            HomeVC.modalPresentationStyle = .fullScreen
             self.present(HomeVC, animated: true, completion: nil)
         }
     }
@@ -107,19 +106,7 @@ class SignInVC: UIViewController {
         let passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z!@#$%^&*()\\-_=+{}|?>.<,:;~`’]{8,}$"
         return NSPredicate(format: "SELF MATCHES %@", passwordRegex).evaluate(with: password)
     }
-    
-    /*
-    func navigateToMainNavigationView(){
-        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "MainNavigationController") as? MainNavigationController else{
-            return
-        }
-        
-        mainNavigationVC.modalPresentationStyle = .fullScreen
-        
-        present(mainNavigationVC, animated: true, completion: nil)
-    }
- */
+
     
 }
 

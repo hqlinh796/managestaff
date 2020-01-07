@@ -23,7 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Can I ues your camera?</string>
+	<string>Can I use your camera?</string>
+	<key>NSRemindersUsageDescription</key>
+	<string>Permission to use Reminder</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>Permission to use Calendar</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
