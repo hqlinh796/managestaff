@@ -258,6 +258,9 @@ class SpreadsheetVC: UIViewController, FilterAndSortDelegate{
             let currentMonth = calendar.component(.month, from: date)
             filterBy.month = currentMonth == 1 ? String(12) : String(currentMonth - 1)
             filterBy.year = currentMonth == 1 ? String(currentYear-1) : String(currentYear)
+            if filterBy.month.count == 1 {
+                filterBy.month = "0" + filterBy.month
+            }
             labelTime.text = "Điểm danh " + filterBy.month + "/" + filterBy.year
         }
     }
@@ -354,7 +357,9 @@ extension SpreadsheetVC: UICollectionViewDataSource {
                     day = "0" + day
                 }
                 var value = ""
+                
                 let key = filterBy.year + filterBy.month + day + listIDStaff[indexPath.section - 1]
+               
                 ref.child("attendance").child(key).observeSingleEvent(of: .value) { (DataSnapshot) in
                     if !DataSnapshot.exists(){
                         value = "X"

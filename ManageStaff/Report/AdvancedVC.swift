@@ -296,6 +296,9 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     @objc func doneDatePicker(){
         filterBy.month = String(datePicker.selectedRow(inComponent: 0) + 1)
         filterBy.year = String(datePicker.selectedRow(inComponent: 1) + 2019)
+        if filterBy.month.count == 1 {
+            filterBy.month = "0" + filterBy.month
+        }
         textfieldTime.text = filterBy.month + "/" + filterBy.year
         self.view.endEditing(true)
     }

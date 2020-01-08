@@ -67,10 +67,16 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
 
         let key = currentYear! + currentMonth! + currentDay! + textfiledQRCode.text!
         ref.child("attendance").child(key).setValue([
-        "staffid": textfiledQRCode.text!,
-        "time": NSDate().timeIntervalSince1970,
-        "shiftleaderid": userAccount.uid
-    ])
+            "staffid": textfiledQRCode.text!,
+            "time": NSDate().timeIntervalSince1970,
+            "shiftleaderid": userAccount.uid
+        ]) { (Error, DatabaseReference) in
+            if let error = Error{
+                self.showNotif(title: "Lỗi", mes: "Không thể điểm danh, hãy thử lại")
+            }else{
+                self.showNotif(title: "Thành công", mes: "Điểm danh thành công")
+            }
+        }
         
     }
     @IBAction func tapOnScan(_ sender: Any) {
@@ -117,21 +123,27 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
     
     func getStaff(qrcode: String){
         ref.child("users").child(qrcode).observe(.value) { (DataSnapshot) in
-            let value = DataSnapshot.value as? NSDictionary
+            if DataSnapshot.exists(){
+                let value = DataSnapshot.value as? NSDictionary
+                
+                let lastname = value?["lastname"] as? String
+                let firstname = value?["firstname"] as? String
+                self.labelName.text = lastname! + " " + firstname!
+                self.labelPhone.text = value?["phone"] as? String
+                let url = URL(string: value?["imgurl"] as! String)
+                self.downloadImage(from: url!, imageView: self.imageviewAvatar)
+                self.labelSex.text = value?["sex"] as? String
+                self.labelDepartment.text = value?["department"] as? String
+                self.labelRole.text = value?["role"] as? String
+                let time = NSDate().timeIntervalSince1970
+                
+                let date = NSDate(timeIntervalSince1970: time)
+                let dateString = self.formatter.string(from: date as Date)
+                self.labelTime.text = dateString
+            }else{
+                self.showNotif(title: "Lỗi", mes: "Không thể tìm thấy nhân viên này")
+            }
             
-            let lastname = value?["lastname"] as? String
-            let firstname = value?["firstname"] as? String
-            self.labelName.text = lastname! + " " + firstname!
-            self.labelPhone.text = value?["phone"] as? String
-            let url = URL(string: value?["imgurl"] as! String)
-            self.downloadImage(from: url!, imageView: self.imageviewAvatar)
-            self.labelSex.text = value?["sex"] as? String
-            self.labelDepartment.text = value?["department"] as? String
-            self.labelRole.text = value?["role"] as? String
-            let time = value?["time"] as! TimeInterval
-            let date = NSDate(timeIntervalSince1970: time)
-            let dateString = self.formatter.string(from: date as Date)
-            self.labelTime.text = dateString
         }
     }
     

@@ -165,7 +165,8 @@ class SignUpVC: UIViewController {
     }
     
     func settingForTextField(textfield: UITextField, placeholder: String){
-        textfield.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        let color = UIColor(red: 187/255, green: 202/255, blue: 215/255, alpha: 1)
+        textfield.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedString.Key.foregroundColor: color])
         textfield.addBorder(toSide: .Bottom, withColor: UIColor.white.cgColor, andThickness: 0.7)
     }
     
