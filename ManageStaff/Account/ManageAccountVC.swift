@@ -61,7 +61,7 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
     //---- ACTION ----------
     @IBAction func tapOnSignOut(_ sender: Any) {
         //show alert
-        let alert = UIAlertController(title: "Sign out", message: "Do you want to sign out?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "ĐĂNG XUẤT", message: "Bạn muốn đăng xuất?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default) { (nil) in
             //sign out
             let firebaseAuth = Auth.auth()

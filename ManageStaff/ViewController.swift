@@ -13,16 +13,35 @@ import Firebase
 var userAccount = user()
 class ViewController: UIViewController {
     
+    //MARK: OUTLETS
+    
+    @IBOutlet weak var checkIn: UIButton!
+    @IBOutlet weak var checkInList: UIButton!
+    
     let child = SpinnerViewController()
     var ref : DatabaseReference!
     let user = Auth.auth().currentUser
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         ref = Database.database().reference()
         self.startLoading(child: child)
         //load user info
-        loadUserToGlobalVar()
+        loadUserToGlobalVar() {
+            if userAccount.role == "Nhân viên" {
+                self.setupForStaff()
+            }
+        }
+
+        
+    }
+    
+    func setupForStaff(){
+        self.checkIn.isEnabled = false
+        self.checkInList.isEnabled = false
+        self.checkIn.backgroundColor = .gray
+        self.checkInList.backgroundColor = .gray
     }
     
     //-----FUNCTION-------
@@ -34,7 +53,10 @@ class ViewController: UIViewController {
             }
     }
     
-    func loadUserToGlobalVar(){
+    func loadUserToGlobalVar(completion: @escaping ()->()){
+        let dispatchGroup = DispatchGroup()
+        
+        dispatchGroup.enter()
         ref.child("users").child(user!.uid).observeSingleEvent(of: .value, with: { (snapshot) in
             // Get user value
             let value = snapshot.value as? NSDictionary
@@ -49,11 +71,16 @@ class ViewController: UIViewController {
             userAccount.department = value?["department"] as? String ?? ""
             userAccount.leaderid = value?["leaderid"] as? String ?? ""
             userAccount.salary = value?["salary"] as? String ?? ""
-            self.load(url: URL(string: userAccount.image)!)
-            self.stopLoading(child: self.child)
+            dispatchGroup.leave()
             
         }) { (error) in
             print("Can't load user info")
+        }
+        
+        dispatchGroup.notify(queue: .main){
+            self.stopLoading(child: self.child)
+            self.load(url: URL(string: userAccount.image)!)
+            completion()
         }
     }
     
