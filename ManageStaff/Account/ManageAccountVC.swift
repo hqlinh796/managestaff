@@ -86,12 +86,12 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         //validate input
         if textfieldFirstName.text!.trimmingCharacters(in: .whitespacesAndNewlines).firstIndex(of: " ") == nil {
             //show alert error
-            showAlert(title: "Lỗi", mes: "Vui lòng nhập tên đầy đủ")
+            showNotif(title: "Lỗi", mes: "Vui lòng nhập tên đầy đủ")
             return
         }
         
         if let numbersRange = textfieldFirstName.text!.rangeOfCharacter(from: .decimalDigits) {
-            showAlert(title: "Lỗi", mes: "Tên không đúng định dạng")
+            showNotif(title: "Lỗi", mes: "Tên không đúng định dạng")
             return
         }
         
@@ -119,14 +119,14 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
                 "imgurl": urlImage
                 ], withCompletionBlock: { (error, DatabaseReference) in
                     if error != nil {
-                        self.showAlert(title: "Lỗi", mes: "Không thể lưu chỉnh sửa, hãy thử lại")
+                        self.showNotif(title: "Lỗi", mes: "Không thể lưu chỉnh sửa, hãy thử lại")
                         return
                     }
             })
             self.stopLoading(child: child)
             self.updateUserAccountGlobal()
             //notify success
-            self.showAlert(title: "Thành công", mes: "Cập nhật tài khoản thành công")
+            self.showNotif(title: "Thành công", mes: "Cập nhật tài khoản thành công")
         })
     }
     
@@ -261,13 +261,13 @@ class ManageAccountVC: UIViewController, UINavigationControllerDelegate, UIImage
         }
     }
     
-    
-    func showAlert(title: String, mes: String){
+    /*
+    func showNotif(title: String, mes: String){
         let alert = UIAlertController(title: title, message: mes, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(OKAction)
         present(alert, animated: true, completion: nil)
-    }
+    }*/
     
     func startLoading(child: SpinnerViewController){
         addChild(child)

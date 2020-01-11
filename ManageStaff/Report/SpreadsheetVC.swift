@@ -32,7 +32,6 @@ class SpreadsheetVC: UIViewController, FilterAndSortDelegate{
     var shiftLeader: [String: String] = [:]
     var isSearch = false
     var attendanceIndexPath = [IndexPath]()
-    var searchBarActive = false
     
     @IBOutlet weak var labelTime: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -397,7 +396,7 @@ extension SpreadsheetVC: UICollectionViewDelegate {
                     self.staff.image = value?["imgurl"] as? String ?? ""
                     self.staff.department = value?["department"] as? String ?? ""
                     self.staff.uid = uid
-                    print("SHOW")
+                    
                     //show Popup view
                     let popUpStaffVC = self.storyboard?.instantiateViewController(withIdentifier: "PopUpStaffID") as! PopUpStaffVC
                     popUpStaffVC.staff = self.staff

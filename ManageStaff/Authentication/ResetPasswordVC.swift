@@ -19,7 +19,7 @@ class ResetPasswordVC: UIViewController {
         // Do any additional setup after loading the view.
         
         //tap anywhere
-        //self.dismissKeyboard()
+        self.dismissKeyboard()
     }
     
    

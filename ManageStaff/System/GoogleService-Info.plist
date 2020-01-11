@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>921323378400-79cigq66hefc5vol7e75u7cv13e3uuf6.apps.googleusercontent.com</string>
+	<string>335512614668-pbnsj2jgfl2s3gvus51bgpvehvmo1m2i.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.921323378400-79cigq66hefc5vol7e75u7cv13e3uuf6</string>
+	<string>com.googleusercontent.apps.335512614668-pbnsj2jgfl2s3gvus51bgpvehvmo1m2i</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBm12UOBnDdkG7oKaEu483bTG2NJ92rKPY</string>
+	<string>AIzaSyC1avCl2NXMLYhI6hGZtwxtr5kYqHWhGoM</string>
 	<key>GCM_SENDER_ID</key>
-	<string>921323378400</string>
+	<string>335512614668</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>abc.ManageStaff</string>
+	<string>abcd.ManageStaff</string>
 	<key>PROJECT_ID</key>
-	<string>managestaff-cc156</string>
+	<string>managepeople-58b47</string>
 	<key>STORAGE_BUCKET</key>
-	<string>managestaff-cc156.appspot.com</string>
+	<string>managepeople-58b47.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:921323378400:ios:e226d292af98098e2ee285</string>
+	<string>1:335512614668:ios:01fb1c7f7bc33493d5fb29</string>
 	<key>DATABASE_URL</key>
-	<string>https://managestaff-cc156.firebaseio.com</string>
+	<string>https://managepeople-58b47.firebaseio.com</string>
 </dict>
 </plist>

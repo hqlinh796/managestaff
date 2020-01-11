@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var checkIn: UIButton!
     @IBOutlet weak var checkInList: UIButton!
+    @IBOutlet weak var manageStaff: UIButton!
+    @IBOutlet weak var imageviewAvatarUser: UIImageView!
+    @IBOutlet weak var labelName: UILabel!
     
     let child = SpinnerViewController()
     var ref : DatabaseReference!
@@ -24,8 +27,10 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.dismissKeyboardAction()
         ref = Database.database().reference()
+      
+        
         self.startLoading(child: child)
         //load user info
         loadUserToGlobalVar() {
@@ -37,11 +42,21 @@ class ViewController: UIViewController {
         
     }
     
+    func setupAvatar(){
+        imageviewAvatarUser.layer.cornerRadius = imageviewAvatarUser.frame.width/2
+        imageviewAvatarUser.clipsToBounds = true
+        imageviewAvatarUser.layer.borderColor = UIColor.white.cgColor
+        imageviewAvatarUser.layer.borderWidth = 4
+    }
+    
+    
     func setupForStaff(){
         self.checkIn.isEnabled = false
         self.checkInList.isEnabled = false
-        self.checkIn.backgroundColor = .gray
-        self.checkInList.backgroundColor = .gray
+        self.manageStaff.isEnabled = false
+        self.checkIn.setTitleColor(UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0.7), for: .normal)
+        self.checkInList.setTitleColor(UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0.7), for: .normal)
+        self.manageStaff.setTitleColor(UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 0.7), for: .normal)
     }
     
     //-----FUNCTION-------
@@ -49,6 +64,7 @@ class ViewController: UIViewController {
             if let data = try? Data(contentsOf: url) {
                 if let image = UIImage(data: data)  {
                     imageAvatar = image
+                    self.imageviewAvatarUser.image = image
                 }
             }
     }
@@ -71,6 +87,7 @@ class ViewController: UIViewController {
             userAccount.department = value?["department"] as? String ?? ""
             userAccount.leaderid = value?["leaderid"] as? String ?? ""
             userAccount.salary = value?["salary"] as? String ?? ""
+            self.labelName.text = userAccount.firstname
             dispatchGroup.leave()
             
         }) { (error) in
@@ -118,6 +135,15 @@ class ViewController: UIViewController {
     
 }
 
+
+extension UIViewController{
+    func showNotif(title: String, mes: String){
+        let alert = UIAlertController(title: title, message: mes, preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        alert.addAction(OKAction)
+        present(alert, animated: true, completion: nil)
+    }
+}
 
 
 

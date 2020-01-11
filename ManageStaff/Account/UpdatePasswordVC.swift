@@ -20,6 +20,7 @@ class UpdatePasswordVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        self.dismissKeyboard()
         // Do any additional setup after loading the view.
     }
 
@@ -67,8 +68,10 @@ class UpdatePasswordVC: UIViewController {
     
     func setup(){
         labelError.isHidden = true
-        let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapOnScreen)
+        //let tapOnScreen = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        //view.addGestureRecognizer(tapOnScreen)
+        textfieldPassword.textContentType = .password
+        textfieldConfirmPassword.textContentType = .password
     }
     
     func isValidPassword(password: String) -> Bool {

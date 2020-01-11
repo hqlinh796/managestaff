@@ -34,9 +34,10 @@ class AdvancedVC: UIViewController, UITableViewDelegate, UITableViewDataSource, 
     
     let arrayFilter = [["Nam", "Nữ"], ["Nhân viên", "Trưởng phòng", "Phó phòng", "Giám đốc"], ["Giám đốc", "Nhân sự", "Kỹ thuật", "Kế toán", "Hậu cần"]]
     
+    /*
     var arraySexFilter = ["Nam", "Nữ"]
     let arrayRoleFilter = ["Giám đốc", "Nhân sự", "Kỹ thuật", "Kế toán", "Hậu cần"]
-    let arrayRoomFilter = ["Nhân viên", "Trưởng phòng", "Phó phòng", "Giám đốc"]
+    let arrayRoomFilter = ["Nhân viên", "Trưởng phòng", "Phó phòng", "Giám đốc"]*/
     var arrayHeaderFilter = ["Giới tính", "Chức vụ", "Phòng ban"]
     
     var selectSection: [Int] = []

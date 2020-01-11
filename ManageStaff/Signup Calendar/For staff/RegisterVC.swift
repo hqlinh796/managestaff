@@ -60,7 +60,7 @@ class RegisterVC: UIViewController, FSCalendarDelegate, FSCalendarDataSource, FS
         formatter.dateFormat = "dd/MM/yyyy"
         let month = Calendar.current.component(.month, from: date)
         let year = Calendar.current.component(.year, from: date)
-        label.text = "Register your working days for: \(month)-\(year)"
+        label.text = "Đăng ký lịch làm việc cho: \(month)-\(year)"
         for day in selectedDay{
             calendar.select(formatter.date(from: "\(day)/\(month)/\(year)"))
         }

@@ -20,6 +20,7 @@ class UpdateEmailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        self.dismissKeyboard()
         // Do any additional setup after loading the view.
     }
     

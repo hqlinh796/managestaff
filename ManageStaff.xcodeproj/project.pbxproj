@@ -26,8 +26,11 @@
 		C34C5C48238E142800A54877 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C34C5C46238E142800A54877 /* LaunchScreen.storyboard */; };
 		C34C5C53238E142800A54877 /* ManageStaffTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C52238E142800A54877 /* ManageStaffTests.swift */; };
 		C34C5C5E238E142800A54877 /* ManageStaffUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C34C5C5D238E142800A54877 /* ManageStaffUITests.swift */; };
-		C34C5C6C238E14B400A54877 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */; };
+		C35B1E3223C7ECFC00294E33 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C35B1E3123C7ECFC00294E33 /* GoogleService-Info.plist */; };
 		C372CDF323B5FAE400F997EA /* FilterTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C372CDF223B5FAE400F997EA /* FilterTVC.swift */; };
+		C37949F123C78849007C4C5C /* ManageUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37949F023C78849007C4C5C /* ManageUserVC.swift */; };
+		C37949F323C78873007C4C5C /* ManageUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37949F223C78873007C4C5C /* ManageUserCell.swift */; };
+		C37949F523C7A8FC007C4C5C /* EditUserVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37949F423C7A8FC007C4C5C /* EditUserVC.swift */; };
 		C37BE0CF23BB05CB000AD40C /* PopUpAtttendanceVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE0CE23BB05CB000AD40C /* PopUpAtttendanceVC.swift */; };
 		C37BE0D123BB0A3C000AD40C /* PopUpStaffVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C37BE0D023BB0A3C000AD40C /* PopUpStaffVC.swift */; };
 		C397635D238FE4E70017C0A9 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C397635C238FE4E70017C0A9 /* SignUpVC.swift */; };
@@ -90,8 +93,11 @@
 		C34C5C59238E142800A54877 /* ManageStaffUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ManageStaffUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C34C5C5D238E142800A54877 /* ManageStaffUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageStaffUITests.swift; sourceTree = "<group>"; };
 		C34C5C5F238E142800A54877 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C35B1E3123C7ECFC00294E33 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C372CDF223B5FAE400F997EA /* FilterTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTVC.swift; sourceTree = "<group>"; };
+		C37949F023C78849007C4C5C /* ManageUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageUserVC.swift; sourceTree = "<group>"; };
+		C37949F223C78873007C4C5C /* ManageUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageUserCell.swift; sourceTree = "<group>"; };
+		C37949F423C7A8FC007C4C5C /* EditUserVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserVC.swift; sourceTree = "<group>"; };
 		C37BE0CE23BB05CB000AD40C /* PopUpAtttendanceVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpAtttendanceVC.swift; sourceTree = "<group>"; };
 		C37BE0D023BB0A3C000AD40C /* PopUpStaffVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpStaffVC.swift; sourceTree = "<group>"; };
 		C397635C238FE4E70017C0A9 /* SignUpVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
@@ -209,6 +215,7 @@
 		C34C5C39238E142600A54877 /* ManageStaff */ = {
 			isa = PBXGroup;
 			children = (
+				C37949EF23C78827007C4C5C /* Manage users */,
 				C3A4834323AA0387009BAA7B /* Report */,
 				C3A032612395DB54005FC134 /* System */,
 				C3A032602395DB2C005FC134 /* CheckInOut */,
@@ -249,6 +256,16 @@
 				C3B6B7BC23ABD968001BD4AB /* ContentCollectionViewCell.swift */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		C37949EF23C78827007C4C5C /* Manage users */ = {
+			isa = PBXGroup;
+			children = (
+				C37949F023C78849007C4C5C /* ManageUserVC.swift */,
+				C37949F223C78873007C4C5C /* ManageUserCell.swift */,
+				C37949F423C7A8FC007C4C5C /* EditUserVC.swift */,
+			);
+			path = "Manage users";
 			sourceTree = "<group>";
 		};
 		C37BE0D223BB0A43000AD40C /* PopUp */ = {
@@ -295,8 +312,8 @@
 				C34C5C3A238E142600A54877 /* AppDelegate.swift */,
 				C34C5C44238E142800A54877 /* Assets.xcassets */,
 				C34C5C46238E142800A54877 /* LaunchScreen.storyboard */,
+				C35B1E3123C7ECFC00294E33 /* GoogleService-Info.plist */,
 				C34C5C41238E142600A54877 /* ManageStaff.xcdatamodeld */,
-				C34C5C6B238E14B400A54877 /* GoogleService-Info.plist */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -434,7 +451,7 @@
 				C34C5C48238E142800A54877 /* LaunchScreen.storyboard in Resources */,
 				C34C5C45238E142800A54877 /* Assets.xcassets in Resources */,
 				C34C5C40238E142600A54877 /* Main.storyboard in Resources */,
-				C34C5C6C238E14B400A54877 /* GoogleService-Info.plist in Resources */,
+				C35B1E3223C7ECFC00294E33 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -575,8 +592,10 @@
 				C3B6B7BB23ABD92F001BD4AB /* CustomCollectionViewLayout.swift in Sources */,
 				C34C5C3B238E142600A54877 /* AppDelegate.swift in Sources */,
 				C397635F238FE5010017C0A9 /* SignInVC.swift in Sources */,
+				C37949F323C78873007C4C5C /* ManageUserCell.swift in Sources */,
 				C3F04613239128100025B761 /* ManageAccountVC.swift in Sources */,
 				B25F200C239F30DA005D1E49 /* RegisterVC.swift in Sources */,
+				C37949F523C7A8FC007C4C5C /* EditUserVC.swift in Sources */,
 				C37BE0D123BB0A3C000AD40C /* PopUpStaffVC.swift in Sources */,
 				C37BE0CF23BB05CB000AD40C /* PopUpAtttendanceVC.swift in Sources */,
 				B236DF33239DF749008EBBBA /* StaffVC.swift in Sources */,
@@ -586,6 +605,7 @@
 				B2395D7A239CDFE200E7E71E /* AddCalendar.swift in Sources */,
 				C3064C9123B496D700CAA6C0 /* SortTVC.swift in Sources */,
 				C319652023B8F06700668C5F /* UpdatePasswordVC.swift in Sources */,
+				C37949F123C78849007C4C5C /* ManageUserVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -762,7 +782,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 258CKC52XJ;
+				DEVELOPMENT_TEAM = JRV6WJL473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -772,7 +792,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
+				PRODUCT_BUNDLE_IDENTIFIER = abcd.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
@@ -786,7 +806,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 258CKC52XJ;
+				DEVELOPMENT_TEAM = JRV6WJL473;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -796,7 +816,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = abc.ManageStaff;
+				PRODUCT_BUNDLE_IDENTIFIER = abcd.ManageStaff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;

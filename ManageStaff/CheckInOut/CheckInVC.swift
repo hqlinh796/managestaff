@@ -147,12 +147,13 @@ class CheckInVC: UIViewController, scanQRCodeDelegate {
         }
     }
     
+    /*
     func showNotif(title: String, mes: String){
         let alert = UIAlertController(title: title, message: mes, preferredStyle: .alert)
         let OKAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(OKAction)
         present(alert, animated: true, completion: nil)
-    }
+    }*/
     func startLoading(child: SpinnerViewController){
         addChild(child)
         child.view.frame = view.frame
