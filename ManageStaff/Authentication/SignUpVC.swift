@@ -75,6 +75,7 @@ class SignUpVC: UIViewController {
                 ])
     
             let homeVC = self.storyboard?.instantiateViewController(withIdentifier: "HomeID") as! ViewController
+            homeVC.modalPresentationStyle = .fullScreen
             self.present(homeVC, animated: true, completion: nil)
         }
     }
